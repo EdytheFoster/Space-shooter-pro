@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 1719024526}
   m_Layer: 0
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,7 +232,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719024521}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -296,7 +296,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1719024526
 MonoBehaviour:
@@ -315,6 +315,7 @@ MonoBehaviour:
     type: 3}
   _fireRate: 0.15
   _canfire: -1
+  _lives: 3
 --- !u!1 &2044730919
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +406,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &8599498467077638992
 PrefabInstance:
@@ -417,7 +418,7 @@ PrefabInstance:
     - target: {fileID: 688726816182699265, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 688726816182699265, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b,
         type: 3}

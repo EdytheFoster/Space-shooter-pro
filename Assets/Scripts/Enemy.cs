@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Jobs;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +31,34 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector3(randomx, 6.4f, 0);
         }
 
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //if other is us
+        //damage player 
+        //destroy us
 
+        if (other.tag == "Player")
+        {
+            Player player = other.transform.GetComponent<Player>();
+            
+            if (player != null) 
+            {
+                player.Damage();
+            }
+            Destroy(this.gameObject);
+        }
+
+        //if other is laser
+        //destroy laser
+        //destroy us
+
+        if (other.tag == "Laser")
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+     
     }
 }
