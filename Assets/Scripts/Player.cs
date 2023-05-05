@@ -74,9 +74,6 @@ public class Player : MonoBehaviour
     {
         _lives--;
 
-        //check if dead
-        //destroy us
-
         if (_lives < 1)
 
         {
