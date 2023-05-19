@@ -35,21 +35,21 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-              if (other.tag == "Player")
+        if (other.tag == "Player")
         {
             Player player = other.transform.GetComponent<Player>();
-            
-            if (player != null) 
+
+            if (player != null)
             {
                 player.Damage();
             }
             Destroy(this.gameObject);
         }
-            if (other.tag == "Laser")
+        if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
-     
+
     }
 }
