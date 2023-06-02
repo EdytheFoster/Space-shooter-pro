@@ -7,12 +7,29 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4f;
+    private Player _player;
+    private Animator _anim;
+
+    //handle to animator component
     
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _player = GameObject.Find("Player").GetComponent<Player>();
+        if (_player == null)
+        {
+            Debug.LogError("The Player is NULL.");
+        }
+
+        //assign the component to anim
+        _anim = GetComponent<Animator>();
+
+        if (_anim == null)
+        {
+            Debug.LogError("The Animator is NULL.");
+        }
+
     }
 
     // Update is called once per frame
@@ -43,12 +60,29 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            Destroy(this.gameObject);
+            //trigger anim
+            GetComponent<Collider2D>().enabled = false;
+            _anim.SetTrigger("OnEnemyDeath");
+            _speed = 0;
+            Destroy(this.gameObject, 2.4f);
         }
+
         if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
-            Destroy(this.gameObject);
+
+            if (_player != null)
+
+            {
+                _player.AddScore(10);
+            }
+
+            //trigger anim
+            //set the enemy collider to false
+            GetComponent<Collider2D>().enabled = false;
+            _anim.SetTrigger("OnEnemyDeath");
+            _speed = 0;
+            Destroy(this.gameObject, 2.4f);
         }
 
     }

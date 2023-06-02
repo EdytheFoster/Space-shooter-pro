@@ -14,27 +14,45 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _tripleShotPrefab;
     [SerializeField]
+    private GameObject _shieldVisualizer;
+    [SerializeField]
+    private GameObject _leftEngine;
+    [SerializeField]
+    private GameObject _rightEngine;
+
+    [SerializeField]
     private float _fireRate = .15f;
     [SerializeField]
     private float _canfire = -1f;
     [SerializeField]
     private int _lives = 3;
+    [SerializeField]
+    private int _score;
+    private UIManager _uiManager;
     private SpawnManager _spawnManager;
     
     private bool _isTripleShotActive = false;
-    [SerializeField]
     private bool _isSpeedPowerupActive = false;
+    private bool _isShieldsPowerupActive = false;
+    
+
+    //variable for shields visualizer
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is NULL.");
         }
+        if (_uiManager == null)
+        {
+            Debug.LogError("The UIManager is NULL.");
+        }    
     }
 
     // Update is called once per frame
@@ -105,7 +123,39 @@ public class Player : MonoBehaviour
     public void Damage()
 
     {
+        //if shields is active
+        //do nothing
+        //deactivate shields
+        //return
+        if (_isShieldsPowerupActive == true)
+        {
+            _isShieldsPowerupActive = false;
+            _shieldVisualizer.SetActive(false);
+            //disable shields visualizer
+            return;
+
+        }
+
         _lives--;
+
+        if (_lives == 2)
+        {
+            _leftEngine.SetActive(true);
+        }
+        else if (_lives == 1)
+        { 
+            _rightEngine.SetActive(true);
+        }
+
+        //if lives is 2
+        //enable left engine
+        //else if lives is 1
+        //enable right engine
+
+
+
+        _uiManager.UpdateLives(_lives);
+
 
         if (_lives < 1)
 
@@ -144,7 +194,23 @@ public class Player : MonoBehaviour
     IEnumerator SpeedPowerupPowerDownRoutine()
     {
       yield return new WaitForSeconds(5.0f);
-      _isSpeedPowerupActive = false;
-      _speed -= _speedPowerup;
+        _isSpeedPowerupActive = false;
+        _speed -= _speedPowerup;
     }
+
+    public void ShieldsPowerupActive()
+    { 
+        _isShieldsPowerupActive = true;
+        _shieldVisualizer.SetActive(true);
+        //enable shields visualizer
+    }
+
+    public void AddScore(int points)
+    {
+        _score += points;
+        _uiManager.UpdateScore(_score);
+    }
+    //method to add 10 to score
+    //communicate with UI to update the score
+
 }

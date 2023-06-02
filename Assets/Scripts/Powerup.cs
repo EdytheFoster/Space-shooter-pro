@@ -40,7 +40,7 @@ public class Powerup : MonoBehaviour
                         player.SpeedPowerupActive();
                         break;
                     case 2:
-                        Debug.Log("shields collected");
+                        player.ShieldsPowerupActive();
                         break;
                     default:
                         Debug.Log("default value");
