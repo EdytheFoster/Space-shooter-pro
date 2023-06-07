@@ -34,6 +34,11 @@ public class Player : MonoBehaviour
     private bool _isTripleShotActive = false;
     private bool _isSpeedPowerupActive = false;
     private bool _isShieldsPowerupActive = false;
+
+    [SerializeField]
+    private AudioClip _laserSoundClip;
+    [SerializeField]
+    private AudioSource _audioSource;
     
 
     //variable for shields visualizer
@@ -44,6 +49,8 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _audioSource = GetComponent<AudioSource>();
+
 
         if (_spawnManager == null)
         {
@@ -52,7 +59,17 @@ public class Player : MonoBehaviour
         if (_uiManager == null)
         {
             Debug.LogError("The UIManager is NULL.");
-        }    
+        }
+        if (_audioSource == null)
+        {
+            Debug.LogError("The Audio Source on the player is NULL.");
+        }
+        else 
+        {
+            _audioSource.clip = _laserSoundClip;
+        }
+
+
     }
 
     // Update is called once per frame
@@ -111,13 +128,8 @@ public class Player : MonoBehaviour
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         }
 
-        //if space key press,
-        //if TripleShotActive is true
-            //fire 3 lasers (triple shot prefab)
+        _audioSource.Play();
 
-        //else fire 1 laser
-
-        //instantiate 3 lasers (triple shot prefab)
     }
 
     public void Damage()
