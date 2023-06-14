@@ -49,6 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
+  _laserPrefab: {fileID: 8965015523047234045, guid: 3972d03a155c90848b39c9a3f05773db,
+    type: 3}
+  _fireRate: 3
+  _canFire: -1
 --- !u!212 &1578403814811069462
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -174,7 +178,8 @@ AudioSource:
   m_GameObject: {fileID: 4077475155324487626}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3579707818587102163, guid: 7bcc714d23f76454aa988b5612e9ddfd,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

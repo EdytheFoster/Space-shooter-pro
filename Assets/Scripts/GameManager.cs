@@ -7,10 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private bool _isGameOver;
-
-
+ 
    
-
     // Update is called once per frame
     private void Update()
     {
@@ -19,7 +17,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
         {
             SceneManager.LoadScene(1);//current game scene
-        } 
+        }
         
     }
 
@@ -27,4 +25,6 @@ public class GameManager : MonoBehaviour
     {
         _isGameOver = true;
     }
+
+   
 }
