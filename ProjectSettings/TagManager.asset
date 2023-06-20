@@ -10,6 +10,7 @@ TagManager:
   - Shields_Powerup
   - Speed_Powerup
   - Shields
+  - Enemy_Laser
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - 
   - 
   - Post Processing
-  - 
+  - Settings
   - 
   - 
   - 
