@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 5f;
     [SerializeField]
+    private float _thrusterSpeed = 10f;
+    [SerializeField]
     private float _speedPowerup = 3.5f;
     [SerializeField]
     private GameObject _laserPrefab;
@@ -19,7 +21,6 @@ public class Player : MonoBehaviour
     private GameObject _leftEngine;
     [SerializeField]
     private GameObject _rightEngine;
-
     [SerializeField]
     private float _fireRate = .15f;
     [SerializeField]
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
     private AudioSource _audioSource;
     
 
-    //variable for shields visualizer
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -77,11 +78,22 @@ public class Player : MonoBehaviour
     {
         CalculateMovement();
 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _speed = _thrusterSpeed;
+        }
+        else
+        {
+            _speed = 5f;
+        }
+       
+
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canfire)
 
         {
             FireLaser();
         }
+      
     }
 
 
@@ -113,6 +125,7 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
+
     }
 
     void FireLaser()
@@ -224,5 +237,7 @@ public class Player : MonoBehaviour
     }
     //method to add 10 to score
     //communicate with UI to update the score
+    
+
 
 }
