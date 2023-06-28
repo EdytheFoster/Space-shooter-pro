@@ -10,13 +10,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _thrusterSpeed = 10f;
     [SerializeField]
-    private float _speedPowerup = 3.5f;
+    private float _speedMultiplier = 2;
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _tripleShotPrefab;
+    private int _shieldPowerupLives = 3;
     [SerializeField]
     private GameObject _shieldVisualizer;
+    private SpriteRenderer _shieldSpriteRenderer;
     [SerializeField]
     private GameObject _leftEngine;
     [SerializeField]
@@ -24,16 +26,20 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireRate = .15f;
     [SerializeField]
-    private float _canfire = -1f;
+    private int _maxAmmo = 15;
+    [SerializeField]
+    private int _ammoCount;
     [SerializeField]
     private int _lives = 3;
     [SerializeField]
     private int _score;
+    [SerializeField]
     private UIManager _uiManager;
+    [SerializeField]
     private SpawnManager _spawnManager;
-    
+
     private bool _isTripleShotActive = false;
-    private bool _isSpeedPowerupActive = false;
+    public bool  isSpeedBoostActive = false;
     private bool _isShieldsPowerupActive = false;
 
     [SerializeField]
@@ -47,10 +53,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _ammoCount = _maxAmmo;
+
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+        _shieldSpriteRenderer = transform.Find("Shields").GetComponentInChildren<SpriteRenderer>();
 
 
         if (_spawnManager == null)
@@ -69,6 +78,10 @@ public class Player : MonoBehaviour
         {
             _audioSource.clip = _laserSoundClip;
         }
+        if (_shieldSpriteRenderer == null)
+        {
+            Debug.LogError("The Shield Sprite Renderer is NULL");
+        }
 
 
     }
@@ -82,13 +95,14 @@ public class Player : MonoBehaviour
         {
             _speed = _thrusterSpeed;
         }
-        else
+        else if
+            (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _speed = 5f;
         }
-       
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canfire)
+ 
+        if (Input.GetKeyDown(KeyCode.Space))
 
         {
             FireLaser();
@@ -130,7 +144,18 @@ public class Player : MonoBehaviour
 
     void FireLaser()
     {
-        _canfire = Time.time + _fireRate;
+        if (_ammoCount > 0)
+        {
+            _ammoCount--;
+            _uiManager.UpdateAmmoCount(_ammoCount);
+        }
+        else if (_ammoCount <= 0)
+        {
+            return;
+        }
+
+
+        _fireRate = Time.time + _fireRate;
 
         if (_isTripleShotActive == true)
         {
@@ -148,16 +173,36 @@ public class Player : MonoBehaviour
     public void Damage()
 
     {
-        //if shields is active
-        //do nothing
-        //deactivate shields
-        //return
         if (_isShieldsPowerupActive == true)
         {
-            _isShieldsPowerupActive = false;
-            _shieldVisualizer.SetActive(false);
-            //disable shields visualizer
-            return;
+            {
+                _shieldSpriteRenderer.color = new Color(1, 1, 1, 1);
+
+                if (_shieldPowerupLives == 3)
+                {
+                    _shieldPowerupLives -= 1;
+                    _shieldSpriteRenderer.color = new Color(1, 1, 1, .67f);
+                    return;
+                }
+
+                if (_shieldPowerupLives == 2)
+                {
+                    _shieldPowerupLives -= 1;
+                    _shieldSpriteRenderer.color = new Color(1, 1, 1, .34f);
+                    return;
+                }
+
+                if (_shieldPowerupLives == 1)
+                {
+                    _shieldPowerupLives -= 1;
+
+                    _isShieldsPowerupActive = false;
+                    _shieldVisualizer.SetActive(false);
+                    return;
+                }
+
+            }
+           
 
         }
 
@@ -172,10 +217,6 @@ public class Player : MonoBehaviour
             _rightEngine.SetActive(true);
         }
 
-        //if lives is 2
-        //enable left engine
-        //else if lives is 1
-        //enable right engine
 
 
 
@@ -185,8 +226,7 @@ public class Player : MonoBehaviour
         if (_lives < 1)
 
         {
-            //communicate with spawn manager 
-            //let them know to stop spawning
+            
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
@@ -194,33 +234,30 @@ public class Player : MonoBehaviour
 
     public void TripleShotActive()
     {
-        //tripleShotActive becomes true
-        //start the power down coroutine for triple shot
+        
         _isTripleShotActive = true;
         StartCoroutine(TripleShotPowerDownRoutine());
        
     }
 
-    //IEnumerator TripleShotPowerDownRoutine
-    //wait 5 seconds
-    //set the triple shot to false
+ 
     IEnumerator TripleShotPowerDownRoutine()
     { 
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
     }
-    public void SpeedPowerupActive()
+    public void SpeedBoostActive()
     {
-        _isSpeedPowerupActive = true;
-        _speed += _speedPowerup;
-        StartCoroutine(SpeedPowerupPowerDownRoutine());
+        isSpeedBoostActive = true;
+        _speed *= _speedMultiplier;
+        StartCoroutine(SpeedBoostPowerDownRoutine());
     }
 
-    IEnumerator SpeedPowerupPowerDownRoutine()
+    IEnumerator SpeedBoostPowerDownRoutine()
     {
       yield return new WaitForSeconds(5.0f);
-        _isSpeedPowerupActive = false;
-        _speed -= _speedPowerup;
+        isSpeedBoostActive = false;
+        _speed /= _speedMultiplier;
     }
 
     public void ShieldsPowerupActive()

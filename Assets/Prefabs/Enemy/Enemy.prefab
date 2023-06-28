@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
-  _laserPrefab: {fileID: 8965015523047234045, guid: 3972d03a155c90848b39c9a3f05773db,
+  _laserPrefab: {fileID: 3544802248407357532, guid: 5b1a9ae83aa78ad44b7807c249add0fe,
     type: 3}
   _fireRate: 3
   _canFire: -1
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SortingLayerID: 2066755779
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84921628a71b714448ce8e446dfd8985, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
