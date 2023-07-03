@@ -10,6 +10,8 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyContainer;
     [SerializeField]
     private GameObject[] powerups;
+    [SerializeField]
+    private GameObject _multiShotPowerupPrefab;
 
     private bool _stopSpawning = false;
 
@@ -25,6 +27,8 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnEnemyRoutine());
 
         StartCoroutine(SpawnPowerupRoutine());
+
+        StartCoroutine(MultiShotPowerupRoutine());
     }
 
     // Update is called once per frame
@@ -53,9 +57,21 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 6.4f, 0);
-            int randomPowerup = Random.Range(0, 3);
+            int randomPowerup = Random.Range(0, 5);
             Instantiate(powerups[randomPowerup], posToSpawn, Quaternion.identity);
             yield return new WaitForSeconds(Random.Range(3, 8f));
+        }
+    }
+
+    IEnumerator MultiShotPowerupRoutine()
+    {
+        yield return new WaitForSeconds(7.0f);
+
+        while (_stopSpawning == false)
+        {
+            Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 6.4f, 0);
+            Instantiate(_multiShotPowerupPrefab, posToSpawn, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(7f, 10f));
         }
     }
 

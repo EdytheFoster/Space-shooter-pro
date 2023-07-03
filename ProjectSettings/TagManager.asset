@@ -11,6 +11,9 @@ TagManager:
   - Speed_Powerup
   - Shields
   - Enemy_Laser
+  - Laser_Ammo_Powerup
+  - Ship_Repair_Powerup
+  - Multi_Shot_Powerup
   layers:
   - Default
   - TransparentFX

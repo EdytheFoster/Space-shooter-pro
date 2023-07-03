@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _tripleShotPrefab;
+    [SerializeField]
+    
     private int _shieldPowerupLives = 3;
     [SerializeField]
     private GameObject _shieldVisualizer;
@@ -41,6 +43,10 @@ public class Player : MonoBehaviour
     private bool _isTripleShotActive = false;
     public bool  isSpeedBoostActive = false;
     private bool _isShieldsPowerupActive = false;
+    public bool _isLaserAmmoPowerupActive = false;
+    public bool _isShipRepairPowerupActive = false;
+   
+    
 
     [SerializeField]
     private AudioClip _laserSoundClip;
@@ -200,10 +206,7 @@ public class Player : MonoBehaviour
                     _shieldVisualizer.SetActive(false);
                     return;
                 }
-
             }
-           
-
         }
 
         _lives--;
@@ -217,16 +220,12 @@ public class Player : MonoBehaviour
             _rightEngine.SetActive(true);
         }
 
-
-
-
         _uiManager.UpdateLives(_lives);
 
 
         if (_lives < 1)
 
         {
-            
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
@@ -264,7 +263,42 @@ public class Player : MonoBehaviour
     { 
         _isShieldsPowerupActive = true;
         _shieldVisualizer.SetActive(true);
-        //enable shields visualizer
+      
+    }
+
+    public void LaserAmmoPowerupActive()
+    {
+        _isLaserAmmoPowerupActive = true;
+        
+        _ammoCount = _maxAmmo;
+        _uiManager.UpdateAmmoCount(_ammoCount);
+        
+
+    }
+
+    public void ShipRepairPowerupActive()
+    {
+        _isShipRepairPowerupActive = true;
+        if (_lives == 3)
+        {
+            _isShipRepairPowerupActive = false;
+        }
+
+        else
+
+            _lives = _lives += 1;
+        _uiManager.UpdateLives(_lives);
+
+        if (_lives == 3)
+        {
+            _leftEngine.SetActive(false);
+        }
+        else if (_lives == 2)
+        {
+            _rightEngine.SetActive(false);
+           
+        }
+        
     }
 
     public void AddScore(int points)
@@ -272,9 +306,6 @@ public class Player : MonoBehaviour
         _score += points;
         _uiManager.UpdateScore(_score);
     }
-    //method to add 10 to score
-    //communicate with UI to update the score
-    
 
 
 }
