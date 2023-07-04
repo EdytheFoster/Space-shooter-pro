@@ -593,7 +593,7 @@ MonoBehaviour:
   - {fileID: 2062478644154594321, guid: 2c12f07ca80a9db4c908fdb243b85faa, type: 3}
   - {fileID: 7237522010314222839, guid: d8b2d6acc005d8d43b7e3901fd759175, type: 3}
   - {fileID: 8552257468013271630, guid: 969c86a16a14abf43afd9729e2bd1f22, type: 3}
-  _multiShotPowerupPrefab: {fileID: 7898553331495623339, guid: 82d862d5d9028754fa581dd5d707d78e,
+  _multiShotPowerupPrefab: {fileID: 5381328239738973417, guid: fdd1b3224cb59dd40b66d82bff861f4d,
     type: 3}
 --- !u!4 &1009009095
 Transform:
@@ -1345,6 +1345,8 @@ MonoBehaviour:
     type: 3}
   _tripleShotPrefab: {fileID: 796346792990417640, guid: 43094188eaf9e8e42a25abf20d0edc78,
     type: 3}
+  _MultiShotPrefab: {fileID: 7054695290289357455, guid: 833436ed7601e02499102c4421a24070,
+    type: 3}
   _shieldPowerupLives: 3
   _shieldVisualizer: {fileID: 1251634503}
   _leftEngine: {fileID: 1011779014}
@@ -1359,6 +1361,7 @@ MonoBehaviour:
   isSpeedBoostActive: 0
   _isLaserAmmoPowerupActive: 0
   _isShipRepairPowerupActive: 0
+  _isMultiShotActive: 0
   _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _audioSource: {fileID: 0}
 --- !u!212 &1915894100

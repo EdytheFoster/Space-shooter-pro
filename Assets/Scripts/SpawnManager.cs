@@ -12,8 +12,11 @@ public class SpawnManager : MonoBehaviour
     private GameObject[] powerups;
     [SerializeField]
     private GameObject _multiShotPowerupPrefab;
+    
+   
 
     private bool _stopSpawning = false;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +31,8 @@ public class SpawnManager : MonoBehaviour
 
         StartCoroutine(SpawnPowerupRoutine());
 
-        StartCoroutine(MultiShotPowerupRoutine());
+        StartCoroutine(SpawnMultiShotRoutine());
+
     }
 
     // Update is called once per frame
@@ -63,15 +67,16 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator MultiShotPowerupRoutine()
+    IEnumerator SpawnMultiShotRoutine()
+    
     {
-        yield return new WaitForSeconds(7.0f);
+        yield return new WaitForSeconds(3f);
 
         while (_stopSpawning == false)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 6.4f, 0);
             Instantiate(_multiShotPowerupPrefab, posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(7f, 10f));
+            yield return new WaitForSeconds(Random.Range(25, 40f));
         }
     }
 

@@ -16,10 +16,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _tripleShotPrefab;
     [SerializeField]
-    
+    private GameObject _MultiShotPrefab;
+    [SerializeField]
     private int _shieldPowerupLives = 3;
     [SerializeField]
-    private GameObject _shieldVisualizer;
+    private GameObject _shieldVisualizer;   
     private SpriteRenderer _shieldSpriteRenderer;
     [SerializeField]
     private GameObject _leftEngine;
@@ -45,6 +46,8 @@ public class Player : MonoBehaviour
     private bool _isShieldsPowerupActive = false;
     public bool _isLaserAmmoPowerupActive = false;
     public bool _isShipRepairPowerupActive = false;
+    public bool _isMultiShotActive = false;
+    
    
     
 
@@ -168,9 +171,24 @@ public class Player : MonoBehaviour
             Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
         }
         else
+        
+        if (_isMultiShotActive == true)
+        { 
+            Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 60f));
+            Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 45f));
+            Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 30f));
+            Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 15f));
+            Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -15f));
+            Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -30f));
+            Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -45f));
+            Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -60f));
+        }
+        else
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         }
+
+      
 
         _audioSource.Play();
 
@@ -231,14 +249,25 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TripleShotActive()
-    {
-        
-        _isTripleShotActive = true;
-        StartCoroutine(TripleShotPowerDownRoutine());
-       
+    public void MultiShotActive()
+    { 
+        _isMultiShotActive = true;
+        StartCoroutine(MultiShotPowerDownRoutine());
     }
 
+    IEnumerator MultiShotPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5f);
+        _isMultiShotActive = false;
+    }
+
+  
+
+    public void TripleShotActive()
+    {       
+        _isTripleShotActive = true;
+        StartCoroutine(TripleShotPowerDownRoutine());       
+    }
  
     IEnumerator TripleShotPowerDownRoutine()
     { 
@@ -262,6 +291,7 @@ public class Player : MonoBehaviour
     public void ShieldsPowerupActive()
     { 
         _isShieldsPowerupActive = true;
+        _shieldPowerupLives = 3;
         _shieldVisualizer.SetActive(true);
       
     }
@@ -297,8 +327,7 @@ public class Player : MonoBehaviour
         {
             _rightEngine.SetActive(false);
            
-        }
-        
+        }          
     }
 
     public void AddScore(int points)
