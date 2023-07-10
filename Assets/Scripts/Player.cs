@@ -37,10 +37,17 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _score;
     [SerializeField]
+    private GameObject _thrusterEngines;
+    [SerializeField]
     private UIManager _uiManager;
     [SerializeField]
     private SpawnManager _spawnManager;
+    [SerializeField]
+    private float _thrusterFuel = 100f;
+    [SerializeField]
+    private float _thrusterRefuelSpeed = 2;
 
+    public bool _isThrusterActive = false;
     private bool _isTripleShotActive = false;
     public bool  isSpeedBoostActive = false;
     private bool _isShieldsPowerupActive = false;
@@ -100,14 +107,50 @@ public class Player : MonoBehaviour
     {
         CalculateMovement();
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && _thrusterFuel > 0)
         {
-            _speed = _thrusterSpeed;
+            if (isSpeedBoostActive)
+            {
+                StopCoroutine(ActivateThrusterRefuel());
+                ActivateThruster();
+            }
+            else
+            {
+                StopCoroutine(ActivateThrusterRefuel());
+                ActivateThruster();
+                _speed = _thrusterSpeed;
+
+            }
         }
-        else if
-            (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && _thrusterFuel <= 0)
         {
-            _speed = 5f;
+            _isThrusterActive = false;
+            if (isSpeedBoostActive)
+            {
+                _thrusterEngines.SetActive(false);
+                StartCoroutine(ActivateThrusterRefuel());
+            }
+            else
+            {
+                _thrusterEngines.SetActive(false);
+                StartCoroutine(ActivateThrusterRefuel());
+                _speed = 5;
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _isThrusterActive = false;
+            if (isSpeedBoostActive)
+            {
+                _thrusterEngines.SetActive(false);
+                StartCoroutine(ActivateThrusterRefuel());
+            }
+            else
+            {
+                _thrusterEngines.SetActive(false);
+                StartCoroutine(ActivateThrusterRefuel());
+                _speed = 5;
+            }
         }
 
  
@@ -119,6 +162,38 @@ public class Player : MonoBehaviour
       
     }
 
+    void ActivateThruster()
+    { 
+        _isThrusterActive = true;
+        if (_thrusterFuel > 0) 
+        {
+            _thrusterEngines.SetActive(true);
+            _thrusterFuel -= 15 * 2 * Time.deltaTime;
+            _uiManager.UpdateThrusterFuel(_thrusterFuel);
+        }
+        else if (_thrusterFuel <= 0)
+        {
+            _thrusterEngines.SetActive(false);
+            _thrusterFuel = 0.0f;
+            _uiManager.UpdateThrusterFuel(_thrusterFuel);
+        }
+    }
+
+    IEnumerator ActivateThrusterRefuel()
+    {
+        while (_thrusterFuel != 100 && _isThrusterActive == false)
+        {
+            yield return new WaitForSeconds(.3f);
+            _thrusterFuel += 30 * _thrusterRefuelSpeed * Time.deltaTime;
+            _uiManager.UpdateThrusterFuel(_thrusterFuel);
+            if (_thrusterFuel >= 100)
+            {
+                _thrusterFuel = 100;
+                _uiManager.UpdateThrusterFuel(_thrusterFuel);
+                break;
+            }
+        }
+    }
 
     void CalculateMovement()
     {
@@ -166,23 +241,27 @@ public class Player : MonoBehaviour
 
         _fireRate = Time.time + _fireRate;
 
-        if (_isTripleShotActive == true)
-        {
-            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
-        }
-        else
-        
         if (_isMultiShotActive == true)
-        { 
+        {
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 60f));
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 45f));
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 30f));
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 15f));
+            Instantiate(_MultiShotPrefab, transform.position, Quaternion.identity);
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -15f));
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -30f));
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -45f));
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -60f));
         }
+
+        else
+
+        if (_isTripleShotActive == true)
+        {
+            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        }
+
+
         else
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
@@ -248,6 +327,9 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+        
+   
 
     public void MultiShotActive()
     { 

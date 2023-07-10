@@ -21,6 +21,10 @@ public class UIManager : MonoBehaviour
     private GameManager _gameManager;
     [SerializeField]
     private Text _ammoText;
+    [SerializeField]
+    private Slider _thrusterFuelSlider;
+    
+    
   
     
 
@@ -41,6 +45,11 @@ public class UIManager : MonoBehaviour
 
         
     }
+    public void UpdateThrusterFuel(float value)
+    {
+        _thrusterFuelSlider.value = value;
+    }
+   
 
     public void UpdateAmmoCount(int AmmoCount)
     {

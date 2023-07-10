@@ -14,6 +14,8 @@ TagManager:
   - Laser_Ammo_Powerup
   - Ship_Repair_Powerup
   - Multi_Shot_Powerup
+  - Thruster_Fuel_Fil
+  - Thruster_Fuel_Bar
   layers:
   - Default
   - TransparentFX
