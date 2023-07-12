@@ -113,6 +113,7 @@ public class Player : MonoBehaviour
             {
                 StopCoroutine(ActivateThrusterRefuel());
                 ActivateThruster();
+                _speed = _thrusterSpeed;
             }
             else
             {
