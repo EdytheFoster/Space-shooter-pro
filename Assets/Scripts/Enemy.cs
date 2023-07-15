@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _speed = 4f;
     [SerializeField]
+    private int _amplitude = 1;
+    [SerializeField]
+    private float _frequency = 1.0f;
+    [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
     private float _fireRate = 3.0f;
@@ -74,6 +78,12 @@ public class Enemy : MonoBehaviour
             float randomx = Random.Range(-9.45f, 9.45f);
             transform.position = new Vector3(randomx, 6.4f, 0);
         }
+        float x = Mathf.Cos(Time.time * _frequency) * _amplitude;
+        float y = transform.position.y;
+        float z = transform.position.z;
+
+        transform.position = new Vector3(x, y, z);
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

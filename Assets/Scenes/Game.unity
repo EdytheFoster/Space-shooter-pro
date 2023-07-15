@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 563513770}
   - component: {fileID: 563513772}
   - component: {fileID: 563513771}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2241,7 +2241,7 @@ MonoBehaviour:
     m_PropagationSpeed: 343
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 7168
   m_IgnoreTag: 
   m_UseImpactDirection: 0
   m_ScaleImpactWithMass: 0
@@ -2432,7 +2432,7 @@ GameObject:
   - component: {fileID: 2015797226}
   - component: {fileID: 2015797225}
   - component: {fileID: 2015797224}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CM vcam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

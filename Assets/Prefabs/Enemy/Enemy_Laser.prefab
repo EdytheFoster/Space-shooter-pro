@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8674927671775331118}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Enemy_Laser
   m_TagString: Enemy_Laser
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ PrefabInstance:
     - target: {fileID: 9214690595205086543, guid: 8de75353c25e8d845a0cbe109f6bc1ca,
         type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8de75353c25e8d845a0cbe109f6bc1ca, type: 3}

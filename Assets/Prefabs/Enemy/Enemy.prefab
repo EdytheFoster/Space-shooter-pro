@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5944081583834389677}
   - component: {fileID: 3826722772363531941}
   - component: {fileID: -6114570201665258259}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
+  _amplitude: 2
+  _frequency: 2
   _laserPrefab: {fileID: 3544802248407357532, guid: 5b1a9ae83aa78ad44b7807c249add0fe,
     type: 3}
   _fireRate: 3
