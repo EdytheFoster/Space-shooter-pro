@@ -12,8 +12,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //if the r key was pressed
-        //restart the current scene
         if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
         {
             SceneManager.LoadScene(1);//current game scene

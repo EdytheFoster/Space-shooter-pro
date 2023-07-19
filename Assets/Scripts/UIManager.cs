@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    //handle to text
     [SerializeField] 
     private Text _scoreText;
     [SerializeField]
@@ -23,17 +22,11 @@ public class UIManager : MonoBehaviour
     private Text _ammoText;
     [SerializeField]
     private Slider _thrusterFuelSlider;
-    
-    
-  
-    
-
+             
 
     // Start is called before the first frame update
     void Start()
     {
-        //assign text component to the handle
-        
         _scoreText.text = "Score: " + 00;
         _gameOverText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
@@ -42,7 +35,6 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogError("GameManager is NULL.");
         }
-
         
     }
     public void UpdateThrusterFuel(float value)
@@ -51,9 +43,9 @@ public class UIManager : MonoBehaviour
     }
    
 
-    public void UpdateAmmoCount(int AmmoCount)
+    public void UpdateAmmoCount(int AmmoCount, int MaxAmmo)
     {
-        _ammoText.text = "Ammo: " + AmmoCount;
+        _ammoText.text = "Ammo: " + AmmoCount + "/" + MaxAmmo;
     }
 
     public void UpdateScore(int PlayerScore)
@@ -63,8 +55,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLives(int currentLives)
     {
-        //display image sprite
-        //give it a new one based on the current lives index
+      
         _LivesImg.sprite = _liveSprites[currentLives];
 
         if(currentLives == 0)
@@ -83,7 +74,6 @@ public class UIManager : MonoBehaviour
 
     }
    
-
     IEnumerator GameOverFlickerRoutine()
     {
         while(true)

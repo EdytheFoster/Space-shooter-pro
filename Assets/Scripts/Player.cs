@@ -55,20 +55,16 @@ public class Player : MonoBehaviour
     public bool _isShipRepairPowerupActive = false;
     public bool _isMultiShotActive = false;
     
-   
-    
-
+       
     [SerializeField]
     private AudioClip _laserSoundClip;
     [SerializeField]
     private AudioSource _audioSource;
-    
-
- 
+     
 
     // Start is called before the first frame update
     void Start()
-    {
+    {       
         _ammoCount = _maxAmmo;
 
         transform.position = new Vector3(0, 0, 0);
@@ -98,7 +94,6 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("The Shield Sprite Renderer is NULL");
         }
-
 
     }
 
@@ -232,7 +227,7 @@ public class Player : MonoBehaviour
         if (_ammoCount > 0)
         {
             _ammoCount--;
-            _uiManager.UpdateAmmoCount(_ammoCount);
+            _uiManager.UpdateAmmoCount(_ammoCount, _maxAmmo);
         }
         else if (_ammoCount <= 0)
         {
@@ -267,9 +262,7 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
         }
-
       
-
         _audioSource.Play();
 
     }
@@ -328,9 +321,7 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-        
-   
+         
 
     public void MultiShotActive()
     { 
@@ -342,9 +333,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         _isMultiShotActive = false;
-    }
-
-  
+    }  
 
     public void TripleShotActive()
     {       
@@ -384,9 +373,8 @@ public class Player : MonoBehaviour
         _isLaserAmmoPowerupActive = true;
         
         _ammoCount = _maxAmmo;
-        _uiManager.UpdateAmmoCount(_ammoCount);
+        _uiManager.UpdateAmmoCount(_ammoCount, _maxAmmo);
         
-
     }
 
     public void ShipRepairPowerupActive()

@@ -14,12 +14,6 @@ public class Multi_Shot_Powerup : MonoBehaviour
     private GameObject _multi_Shot_PowerupPrefab;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {

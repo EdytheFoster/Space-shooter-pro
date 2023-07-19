@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.Jobs;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -8,9 +7,11 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _speed = 4f;
     [SerializeField]
-    private int _amplitude = 1;
+    private int _amplitude = 2;
+    private Vector3 _position;
+    private Vector3 _axis;
     [SerializeField]
-    private float _frequency = 1.0f;
+    private float _frequency = 4.0f;
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
@@ -21,12 +22,12 @@ public class Enemy : MonoBehaviour
     private Animator _anim;
     private AudioSource _audioSource;
 
-    //handle to animator component
-    
-
+      
     // Start is called before the first frame update
     void Start()
     {
+        _position = transform.position;
+        _axis = transform.right;
         _player = GameObject.Find("Player").GetComponent<Player>();
         _audioSource = GetComponent<AudioSource>();
         if (_player == null)
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour
             Debug.LogError("The Player is NULL.");
         }
 
-        //assign the component to anim
+       
         _anim = GetComponent<Animator>();
 
         if (_anim == null)
@@ -47,13 +48,14 @@ public class Enemy : MonoBehaviour
             Debug.LogError("The audio source on the enemy is NULL.");
         }
 
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        ZigZagMovement();
         CalculateMovement();
+        
 
         if (Time.time > _canFire)
         { 
@@ -73,16 +75,17 @@ public class Enemy : MonoBehaviour
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        if (transform.position.y <= -6.4f)
+        if (transform.position.y <= -7.0f)
         {
-            float randomx = Random.Range(-9.45f, 9.45f);
-            transform.position = new Vector3(randomx, 6.4f, 0);
+            Destroy(this.gameObject);
         }
-        float x = Mathf.Cos(Time.time * _frequency) * _amplitude;
-        float y = transform.position.y;
-        float z = transform.position.z;
+               
+    }
 
-        transform.position = new Vector3(x, y, z);
+    void ZigZagMovement()
+   {
+        _position += Vector3.down * Time.deltaTime * _speed;
+        transform.position = _position + _axis * Mathf.Cos(Time.time * _frequency) * _amplitude;
 
     }
 
@@ -96,10 +99,12 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            //trigger anim
+         
             GetComponent<Collider2D>().enabled = false;
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
+            _amplitude = 0;
+            _frequency = 0;
             _audioSource.Play();
             Destroy(this.gameObject, 2.4f);
         }
@@ -114,11 +119,12 @@ public class Enemy : MonoBehaviour
                 _player.AddScore(10);
             }
 
-            //trigger anim
-            //set the enemy collider to false
+           
             GetComponent<Collider2D>().enabled = false;
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
+            _amplitude = 0;
+            _frequency = 0;
             _audioSource.Play();
             Destroy(this.gameObject, 2.4f);
         }
