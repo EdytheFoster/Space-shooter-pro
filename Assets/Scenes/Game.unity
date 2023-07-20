@@ -1152,6 +1152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77901b1095d887469b2195ccd4e3b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
   waves:
   - name: wave 1
     enemy: {fileID: 688726816182699265, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
@@ -1159,12 +1160,12 @@ MonoBehaviour:
     rate: 1
   - name: wave 2
     enemy: {fileID: 688726816182699265, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
-    count: 5
-    rate: 1.5
+    count: 4
+    rate: 2
   - name: wave 3
     enemy: {fileID: 688726816182699265, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
-    count: 7
-    rate: 2
+    count: 5
+    rate: 3
   spawnPoints:
   - {fileID: 1516415077}
   - {fileID: 97455981}
@@ -2405,6 +2406,7 @@ MonoBehaviour:
   _thrusterEngines: {fileID: 1297487693}
   _uiManager: {fileID: 0}
   _spawnManager: {fileID: 0}
+  _waveSpawner: {fileID: 0}
   _thrusterFuel: 100
   _thrusterRefuelSpeed: 2
   _isThrusterActive: 0

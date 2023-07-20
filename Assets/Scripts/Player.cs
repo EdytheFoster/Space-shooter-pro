@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private SpawnManager _spawnManager;
     [SerializeField]
+    private WaveSpawner _waveSpawner;
+    [SerializeField]
     private float _thrusterFuel = 100f;
     [SerializeField]
     private float _thrusterRefuelSpeed = 2;
@@ -69,6 +71,7 @@ public class Player : MonoBehaviour
 
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
+        _waveSpawner = GameObject.Find("Spawn_Manager").GetComponent<WaveSpawner>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
         _shieldSpriteRenderer = transform.Find("Shields").GetComponentInChildren<SpriteRenderer>();
@@ -318,6 +321,7 @@ public class Player : MonoBehaviour
 
         {
             _spawnManager.OnPlayerDeath();
+            _waveSpawner.StartSpawning(false);
             Destroy(this.gameObject);
         }
     }

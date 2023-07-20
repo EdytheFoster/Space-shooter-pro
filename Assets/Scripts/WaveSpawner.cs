@@ -2,7 +2,9 @@
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
-{        
+{
+    
+    public Player _player;
     public enum SpawnState { Spawning, Waiting, Counting };
 
     [System.Serializable]
@@ -24,36 +26,47 @@ public class WaveSpawner : MonoBehaviour
 
     public SpawnState state = SpawnState.Counting;
 
+    private bool _spawning = false;
+    public void StartSpawning(bool state)
+    { 
+        _spawning = state;
+    }
+
     void Start()
+      
     {               
         waveCountdown = timeBetweenWaves;
     }
 
     void Update()
     {
-        if (waveCountdown <= 0)
+        if (_spawning == true)
         {
-            if (state == SpawnState.Waiting)
+            if (waveCountdown <= 0)
             {
-                if (!EnemyIsAlive())
+                if (state == SpawnState.Waiting)
                 {
-                    WaveCompleted();
+                    if (!EnemyIsAlive())
+                    {
+                        WaveCompleted();
+                    }
+                    else
+                    {
+                        return;
+                    }
+
                 }
-                else 
+                if (state != SpawnState.Spawning)
                 {
-                    return;
+                    StartCoroutine(SpawnWave(waves[_nextWave]));
                 }
-                                        
             }
-            if (state != SpawnState.Spawning)
+            else
             {
-                StartCoroutine(SpawnWave(waves[_nextWave]));
-            }     
+                waveCountdown -= Time.deltaTime;
+            }
         }
-        else 
-        { 
-            waveCountdown -= Time.deltaTime;
-        }
+      
     }
     void WaveCompleted()
     {
@@ -111,5 +124,5 @@ public class WaveSpawner : MonoBehaviour
         Instantiate(_enemy, _sp.position, _sp.rotation);
         
     }
-
+   
 }

@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     private float _fireRate = 3.0f;
     [SerializeField]
     private float _canFire = -1.0f;
-    private Player _player;
+    public Player _player;
     private Animator _anim;
     private AudioSource _audioSource;
 
