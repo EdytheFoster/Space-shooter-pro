@@ -28,7 +28,12 @@ public class WaveSpawner : MonoBehaviour
 
     private bool _spawning = false;
     public void StartSpawning(bool state)
-    { 
+    {
+        if (state == false)
+        {
+            StopAllCoroutines();
+        }
+
         _spawning = state;
     }
 

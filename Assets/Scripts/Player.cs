@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
         _shieldSpriteRenderer = transform.Find("Shields").GetComponentInChildren<SpriteRenderer>();
 
 
+
         if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is NULL.");
@@ -103,6 +104,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         CalculateMovement();
 
         if (Input.GetKey(KeyCode.LeftShift) && _thrusterFuel > 0)
@@ -320,6 +322,7 @@ public class Player : MonoBehaviour
         if (_lives < 1)
 
         {
+            GetComponent<Collider2D>().enabled = false;
             _spawnManager.OnPlayerDeath();
             _waveSpawner.StartSpawning(false);
             Destroy(this.gameObject);
