@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 5f;
     [SerializeField]
+    private float _immobilizerSpeed = 0f;
+    [SerializeField]
     private float _thrusterSpeed = 10f;
     [SerializeField]
     private float _speedMultiplier = 2;
@@ -18,10 +20,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _MultiShotPrefab;
     [SerializeField]
+    private GameObject _ImmobilizerPrefab;
+    [SerializeField]
     private int _shieldPowerupLives = 3;
     [SerializeField]
-    private GameObject _shieldVisualizer;   
+    private GameObject _shieldVisualizer;
     private SpriteRenderer _shieldSpriteRenderer;
+    [SerializeField]
+    private GameObject _immobilizerVisualizer;
     [SerializeField]
     private GameObject _leftEngine;
     [SerializeField]
@@ -37,6 +43,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _score;
     [SerializeField]
+    private GameObject _mainThrusterEngine;
+    [SerializeField]
     private GameObject _thrusterEngines;
     [SerializeField]
     private UIManager _uiManager;
@@ -49,6 +57,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _thrusterRefuelSpeed = 2;
 
+
+    public bool _isLaserPrefab = true;
     public bool _isThrusterActive = false;
     private bool _isTripleShotActive = false;
     public bool  isSpeedBoostActive = false;
@@ -56,6 +66,7 @@ public class Player : MonoBehaviour
     public bool _isLaserAmmoPowerupActive = false;
     public bool _isShipRepairPowerupActive = false;
     public bool _isMultiShotActive = false;
+    public bool _isImmobilizerActive = false;
     
        
     [SerializeField]
@@ -75,6 +86,7 @@ public class Player : MonoBehaviour
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
         _shieldSpriteRenderer = transform.Find("Shields").GetComponentInChildren<SpriteRenderer>();
+        
 
 
 
@@ -154,6 +166,7 @@ public class Player : MonoBehaviour
             }
         }
 
+
  
         if (Input.GetKeyDown(KeyCode.Space))
 
@@ -200,7 +213,7 @@ public class Player : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-
+    
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
         {
             transform.Translate(direction * _speed * Time.deltaTime);
@@ -224,6 +237,7 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
+
 
     }
 
@@ -328,7 +342,35 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-         
+
+
+    public void ImmobilizerActive()
+    {
+        _isImmobilizerActive = true;
+        _immobilizerVisualizer.SetActive(true);
+        _mainThrusterEngine.SetActive(false);
+        _isMultiShotActive = false;
+        _isTripleShotActive = false;
+        _speed = _immobilizerSpeed;
+        _laserPrefab.SetActive(false);
+        _audioSource.volume = 0;
+        GetComponent<Collider2D>().enabled = false;
+        
+        StartCoroutine(ImmobilizerPowerDownRoutine());
+    }
+
+    IEnumerator ImmobilizerPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5f);
+        _immobilizerVisualizer.SetActive(false);
+        _mainThrusterEngine.SetActive(true);
+        _isImmobilizerActive = false;
+        _laserPrefab.SetActive(true);
+        _audioSource.volume = 1;
+        GetComponent<Collider2D>().enabled = true;
+        
+        _speed = 5f;
+    }
 
     public void MultiShotActive()
     { 

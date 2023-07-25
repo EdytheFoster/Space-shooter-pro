@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    
+
+
     public Player _player;
     public enum SpawnState { Spawning, Waiting, Counting };
 
     [System.Serializable]
     public class Wave
-    { 
+    {
         public string name;
         public Transform enemy;
+        public Transform enemy2;
         public int count;
         public float rate;
     }
@@ -38,8 +40,8 @@ public class WaveSpawner : MonoBehaviour
     }
 
     void Start()
-      
-    {               
+
+    {
         waveCountdown = timeBetweenWaves;
     }
 
@@ -52,6 +54,7 @@ public class WaveSpawner : MonoBehaviour
                 if (state == SpawnState.Waiting)
                 {
                     if (!EnemyIsAlive())
+                    
                     {
                         WaveCompleted();
                     }
@@ -71,7 +74,7 @@ public class WaveSpawner : MonoBehaviour
                 waveCountdown -= Time.deltaTime;
             }
         }
-      
+
     }
     void WaveCompleted()
     {
@@ -88,7 +91,7 @@ public class WaveSpawner : MonoBehaviour
         else
         {
             _nextWave++;
-        }        
+        }
     }
 
     bool EnemyIsAlive()
@@ -100,7 +103,7 @@ public class WaveSpawner : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("Enemy") == null)
             {
                 return false;
-            }                
+            }
         }
 
         return true;
@@ -113,6 +116,9 @@ public class WaveSpawner : MonoBehaviour
         for (int i = 0; i < _wave.count; i++)
         {
             SpawnEnemy(_wave.enemy);
+            SpawnEnemy2(_wave.enemy2);
+            
+            
             yield return new WaitForSeconds(1f / _wave.rate);
         }
 
@@ -120,7 +126,7 @@ public class WaveSpawner : MonoBehaviour
 
         yield break;
     }
-    void SpawnEnemy (Transform _enemy)
+    void SpawnEnemy(Transform _enemy)
     {
         //Spawn enemy
         Debug.Log("Spawning enemy: " + _enemy.name);
@@ -128,6 +134,16 @@ public class WaveSpawner : MonoBehaviour
         Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
         Instantiate(_enemy, _sp.position, _sp.rotation);
         
+        
+
     }
-   
+    void SpawnEnemy2(Transform _enemy2)
+    {
+        //Spawn enemy
+        Debug.Log("Spawning enemy: " + _enemy2.name);
+
+        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Instantiate(_enemy2, _sp.position, _sp.rotation);
+
+    }
 }

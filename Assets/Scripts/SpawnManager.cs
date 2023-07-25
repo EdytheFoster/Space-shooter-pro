@@ -6,12 +6,16 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject _enemyPrefab;
+    //[SerializeField]
+    //private GameObject _enemy2Prefab;
     [SerializeField]
     private GameObject _enemyContainer;
     [SerializeField]
     private GameObject[] powerups;
     [SerializeField]
     private GameObject _multiShotPowerupPrefab;
+    [SerializeField]
+    private GameObject _immobilizerPrefab;
     
    
 
@@ -27,11 +31,13 @@ public class SpawnManager : MonoBehaviour
 
     public void StartSpawning()
     {
-        //StartCoroutine(SpawnEnemyRoutine());
+        //StartCoroutine(SpawnEnemy2Routine());
 
         StartCoroutine(SpawnPowerupRoutine());
 
         StartCoroutine(SpawnMultiShotRoutine());
+
+        StartCoroutine(SpawnImmobilizerRoutine());
 
     }
 
@@ -41,19 +47,19 @@ public class SpawnManager : MonoBehaviour
         
     }
 
-    //IEnumerator SpawnEnemyRoutine()
+    //IEnumerator SpawnEnemy2Routine()
     //{
 
-        //yield return new WaitForSeconds(3.0f);
+     //   yield return new WaitForSeconds(3.0f);
 
-        //while (_stopSpawning == false)
-        //{
-           // Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 7.0f, 0);
-           // GameObject newEnemy = Instantiate(_enemyPrefab, posToSpawn, Quaternion.identity);
-           // newEnemy.transform.parent = _enemyContainer.transform;
-           //
-           //yield return new WaitForSeconds(3.0f);
-        //}        
+    //    while (_stopSpawning == false)
+      //  {
+      //      Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 7.0f, 0);
+     //       GameObject newEnemy = Instantiate(_enemy2Prefab, posToSpawn, Quaternion.identity);
+      //      newEnemy.transform.parent = _enemyContainer.transform;
+           
+      //     yield return new WaitForSeconds(3.0f);
+      //  }        
    // }
 
     IEnumerator SpawnPowerupRoutine()
@@ -81,6 +87,21 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(25, 40f));
         }
     }
+
+    IEnumerator SpawnImmobilizerRoutine()
+
+    {
+        yield return new WaitForSeconds(3f);
+
+        while (_stopSpawning == false)
+        {
+            Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 6.4f, 0);
+            Instantiate(_immobilizerPrefab, posToSpawn, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(25, 40f));
+        }
+    }
+
+
 
     public void OnPlayerDeath()
     {

@@ -16,6 +16,8 @@ TagManager:
   - Multi_Shot_Powerup
   - Thruster_Fuel_Fil
   - Thruster_Fuel_Bar
+  - Immobilizer
+  - Fire_Shot
   layers:
   - Default
   - TransparentFX
@@ -58,4 +60,7 @@ TagManager:
     locked: 0
   - name: Forground
     uniqueID: 2066755779
+    locked: 0
+  - name: in front of foreground
+    uniqueID: 2082098761
     locked: 0
