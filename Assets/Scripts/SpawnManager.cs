@@ -5,19 +5,11 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _enemyPrefab;
-    //[SerializeField]
-    //private GameObject _enemy2Prefab;
-    [SerializeField]
-    private GameObject _enemyContainer;
-    [SerializeField]
-    private GameObject[] powerups;
-    [SerializeField]
-    private GameObject _multiShotPowerupPrefab;
-    [SerializeField]
-    private GameObject _immobilizerPrefab;
-    
-   
+    private GameObject[] _powerups;
+    public int[] powerupsTable = { 40, 20, 10, 10, 10, 5, 5};
+    private int _powerupTotalWeight;
+    private int _powerupRandomNumber;
+      
 
     private bool _stopSpawning = false;
    
@@ -25,20 +17,36 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (var item in powerupsTable)
+        {
+            _powerupTotalWeight += item;
+        }
 
+    }
+
+    void ChoosePowerUp()
+    {
+        float randomX = Random.Range(-9.45f, 9.45f);
+
+        _powerupRandomNumber = Random.Range(0, _powerupTotalWeight);
+
+        for (int i = 0; i < powerupsTable.Length; i++)
+        { 
+            if (_powerupRandomNumber <= powerupsTable[i])
+            {
+                Instantiate(_powerups[i], new Vector3(randomX, 7, 0), Quaternion.identity);
+                return;
+            }
+            else 
+            { 
+                _powerupRandomNumber -= powerupsTable[i];
+            }
+        }
     }
 
     public void StartSpawning()
     {
-        //StartCoroutine(SpawnEnemy2Routine());
-
-        StartCoroutine(SpawnPowerupRoutine());
-
-        StartCoroutine(SpawnMultiShotRoutine());
-
-        StartCoroutine(SpawnImmobilizerRoutine());
-
+        StartCoroutine(SpawnPowerupRoutine());    
     }
 
     // Update is called once per frame
@@ -47,61 +55,16 @@ public class SpawnManager : MonoBehaviour
         
     }
 
-    //IEnumerator SpawnEnemy2Routine()
-    //{
-
-     //   yield return new WaitForSeconds(3.0f);
-
-    //    while (_stopSpawning == false)
-      //  {
-      //      Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 7.0f, 0);
-     //       GameObject newEnemy = Instantiate(_enemy2Prefab, posToSpawn, Quaternion.identity);
-      //      newEnemy.transform.parent = _enemyContainer.transform;
-           
-      //     yield return new WaitForSeconds(3.0f);
-      //  }        
-   // }
-
     IEnumerator SpawnPowerupRoutine()
     {
         yield return new WaitForSeconds(3.0f);
 
         while (_stopSpawning == false)
         {
-            Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 6.4f, 0);
-            int randomPowerup = Random.Range(0, 5);
-            Instantiate(powerups[randomPowerup], posToSpawn, Quaternion.identity);
+            ChoosePowerUp();
             yield return new WaitForSeconds(Random.Range(3, 8f));
         }
     }
-
-    IEnumerator SpawnMultiShotRoutine()
-    
-    {
-        yield return new WaitForSeconds(3f);
-
-        while (_stopSpawning == false)
-        {
-            Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 6.4f, 0);
-            Instantiate(_multiShotPowerupPrefab, posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(25, 40f));
-        }
-    }
-
-    IEnumerator SpawnImmobilizerRoutine()
-
-    {
-        yield return new WaitForSeconds(3f);
-
-        while (_stopSpawning == false)
-        {
-            Vector3 posToSpawn = new Vector3(Random.Range(-9.45f, 9.45f), 6.4f, 0);
-            Instantiate(_immobilizerPrefab, posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(25, 40f));
-        }
-    }
-
-
 
     public void OnPlayerDeath()
     {

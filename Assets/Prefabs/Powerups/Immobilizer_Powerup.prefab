@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 2209469672080296552}
   - component: {fileID: 2209469672080296553}
   - component: {fileID: 2209469672080296554}
-  - component: {fileID: 1054292837}
+  - component: {fileID: 7202359933007712318}
   m_Layer: 0
   m_Name: Immobilizer_Powerup
-  m_TagString: Untagged
+  m_TagString: Power_Up
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,7 +152,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1054292837
+--- !u!114 &7202359933007712318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,9 +161,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2209469672080296555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78502a5784c265c45822733d4d1dc161, type: 3}
+  m_Script: {fileID: 11500000, guid: de3e3b91a776519498c1fec1e6d459a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
+  _powerUpID: 6
   _clip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
-  _immobilizerPrefab: {fileID: 2209469672080296555}

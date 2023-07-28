@@ -6,12 +6,6 @@ public class Enemy2 : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4f;
-    //[SerializeField]
-   // private int _amplitude = 2;
-    //private Vector3 _position;
-    //private Vector3 _axis;
-   // [SerializeField]
-    //private float _frequency = 4.0f;
     [SerializeField]
     private GameObject _fireShotPrefab;
     [SerializeField]
@@ -26,8 +20,6 @@ public class Enemy2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //_position = transform.position;
-        //_axis = transform.right;
         _player = GameObject.Find("Player")?.GetComponent<Player>();
         _audioSource = GetComponent<AudioSource>();
         if (_player == null)
@@ -53,7 +45,6 @@ public class Enemy2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ZigZagMovement();
         CalculateMovement();
 
 
@@ -61,13 +52,7 @@ public class Enemy2 : MonoBehaviour
         {
             _fireRate = Random.Range(3f, 7f);
             _canFire = Time.time + _fireRate;
-            GameObject FireShot = Instantiate(_fireShotPrefab, transform.position, Quaternion.identity);
-            //Laser[] lasers = enemyLaser.GetComponentsInChildren<Laser>();
-
-            //for (int i = 0; i < lasers.Length; i++)
-            //{
-            //    lasers[i].AssignEnemyLaser();
-            //}
+            Instantiate(_fireShotPrefab, transform.position, Quaternion.identity);
         }
     }
 
@@ -83,13 +68,6 @@ public class Enemy2 : MonoBehaviour
 
     }
 
-    //void ZigZagMovement()
-    //{
-       // _position += Vector3.down * Time.deltaTime * _speed;
-       //transform.position = _position + _axis * Mathf.Cos(Time.time * _frequency) * _amplitude;
-
-    //}
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -104,8 +82,6 @@ public class Enemy2 : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
-            //_amplitude = 0;
-            //_frequency = 0;
             _audioSource.Play();
             Destroy(this.gameObject, 2.4f);
         }
@@ -124,8 +100,6 @@ public class Enemy2 : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
-            //_amplitude = 0;
-            //_frequency = 0;
             _audioSource.Play();
             Destroy(this.gameObject, 2.4f);
         }

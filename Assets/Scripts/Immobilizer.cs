@@ -33,7 +33,7 @@ public class Immobilizer : MonoBehaviour
 
             if (player != null)
             {
-                player.ImmobilizerActive();
+                player.ImmobilizerPowerupActive();
             }
 
             Destroy(this.gameObject);

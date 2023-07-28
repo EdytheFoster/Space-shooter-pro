@@ -1113,21 +1113,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1762e04f3bf8ba47a649b4439d6ef2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 4077475155324487626, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b,
-    type: 3}
-  _enemy2Prefab: {fileID: 2359329010778269262, guid: 60e4743b7916d804fa907248697428f1,
-    type: 3}
-  _enemyContainer: {fileID: 1788660419}
-  powerups:
+  _powerups:
+  - {fileID: 7237522010314222839, guid: d8b2d6acc005d8d43b7e3901fd759175, type: 3}
   - {fileID: 3131404426011068407, guid: 7fc92f6635ac4a64cb347196347e35f7, type: 3}
   - {fileID: 6440376552143154160, guid: 226155ff76f338d41901395931204e3e, type: 3}
   - {fileID: 2062478644154594321, guid: 2c12f07ca80a9db4c908fdb243b85faa, type: 3}
-  - {fileID: 7237522010314222839, guid: d8b2d6acc005d8d43b7e3901fd759175, type: 3}
+  - {fileID: 2209469672080296555, guid: b06af9e9332586e4696fe5989dc8e706, type: 3}
   - {fileID: 8552257468013271630, guid: 969c86a16a14abf43afd9729e2bd1f22, type: 3}
-  _multiShotPowerupPrefab: {fileID: 5381328239738973417, guid: fdd1b3224cb59dd40b66d82bff861f4d,
-    type: 3}
-  _immobilizerPrefab: {fileID: 2209469672080296555, guid: b06af9e9332586e4696fe5989dc8e706,
-    type: 3}
+  - {fileID: 5381328239738973417, guid: fdd1b3224cb59dd40b66d82bff861f4d, type: 3}
+  powerupsTable: 28000000140000000a0000000a0000000a0000000500000005000000
 --- !u!4 &1009009095
 Transform:
   m_ObjectHideFlags: 0
@@ -1169,13 +1163,13 @@ MonoBehaviour:
     enemy2: {fileID: 5689541989243859461, guid: 60e4743b7916d804fa907248697428f1,
       type: 3}
     count: 2
-    rate: 2
+    rate: 3
   - name: wave 3
     enemy: {fileID: 688726816182699265, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
     enemy2: {fileID: 5689541989243859461, guid: 60e4743b7916d804fa907248697428f1,
       type: 3}
-    count: 3
-    rate: 3
+    count: 2
+    rate: 5
   spawnPoints:
   - {fileID: 1516415077}
   - {fileID: 97455981}
@@ -2426,11 +2420,13 @@ MonoBehaviour:
   _thrusterRefuelSpeed: 2
   _isLaserPrefab: 1
   _isThrusterActive: 0
-  isSpeedBoostActive: 0
+  _isTripleShotPowerupActive: 0
+  isSpeedBoostPowerupActive: 0
+  _isShieldsPowerupActive: 0
   _isLaserAmmoPowerupActive: 0
   _isShipRepairPowerupActive: 0
-  _isMultiShotActive: 0
-  _isImmobilizerActive: 0
+  _isMultiShotPowerupActive: 0
+  _isImmobilizerPowerupActive: 0
   _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _audioSource: {fileID: 0}
 --- !u!212 &1915894100

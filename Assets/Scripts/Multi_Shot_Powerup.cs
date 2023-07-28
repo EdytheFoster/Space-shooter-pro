@@ -34,7 +34,7 @@ public class Multi_Shot_Powerup : MonoBehaviour
 
             if (player != null)
             {
-                player.MultiShotActive();
+                player.MultiShotPowerupActive();
             }
 
             Destroy(this.gameObject);

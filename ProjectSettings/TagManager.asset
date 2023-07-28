@@ -18,6 +18,7 @@ TagManager:
   - Thruster_Fuel_Bar
   - Immobilizer
   - Fire_Shot
+  - Power_Up
   layers:
   - Default
   - TransparentFX

@@ -60,13 +60,13 @@ public class Player : MonoBehaviour
 
     public bool _isLaserPrefab = true;
     public bool _isThrusterActive = false;
-    private bool _isTripleShotActive = false;
-    public bool  isSpeedBoostActive = false;
-    private bool _isShieldsPowerupActive = false;
+    public bool _isTripleShotPowerupActive = false;
+    public bool  isSpeedBoostPowerupActive = false;
+    public bool _isShieldsPowerupActive = false;
     public bool _isLaserAmmoPowerupActive = false;
     public bool _isShipRepairPowerupActive = false;
-    public bool _isMultiShotActive = false;
-    public bool _isImmobilizerActive = false;
+    public bool _isMultiShotPowerupActive = false;
+    public bool _isImmobilizerPowerupActive = false;
     
        
     [SerializeField]
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) && _thrusterFuel > 0)
         {
-            if (isSpeedBoostActive)
+            if (isSpeedBoostPowerupActive)
             {
                 StopCoroutine(ActivateThrusterRefuel());
                 ActivateThruster();
@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && _thrusterFuel <= 0)
         {
             _isThrusterActive = false;
-            if (isSpeedBoostActive)
+            if (isSpeedBoostPowerupActive)
             {
                 _thrusterEngines.SetActive(false);
                 StartCoroutine(ActivateThrusterRefuel());
@@ -153,7 +153,7 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _isThrusterActive = false;
-            if (isSpeedBoostActive)
+            if (isSpeedBoostPowerupActive)
             {
                 _thrusterEngines.SetActive(false);
                 StartCoroutine(ActivateThrusterRefuel());
@@ -256,7 +256,7 @@ public class Player : MonoBehaviour
 
         _fireRate = Time.time + _fireRate;
 
-        if (_isMultiShotActive == true)
+        if (_isMultiShotPowerupActive == true)
         {
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 60f));
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, 45f));
@@ -271,7 +271,7 @@ public class Player : MonoBehaviour
 
         else
 
-        if (_isTripleShotActive == true)
+        if (_isTripleShotPowerupActive == true)
         {
             Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
         }
@@ -344,13 +344,13 @@ public class Player : MonoBehaviour
     }
 
 
-    public void ImmobilizerActive()
+    public void ImmobilizerPowerupActive()
     {
-        _isImmobilizerActive = true;
+        _isImmobilizerPowerupActive = true;
         _immobilizerVisualizer.SetActive(true);
         _mainThrusterEngine.SetActive(false);
-        _isMultiShotActive = false;
-        _isTripleShotActive = false;
+        _isMultiShotPowerupActive = false;
+        _isTripleShotPowerupActive = false;
         _speed = _immobilizerSpeed;
         _laserPrefab.SetActive(false);
         _audioSource.volume = 0;
@@ -364,7 +364,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(5f);
         _immobilizerVisualizer.SetActive(false);
         _mainThrusterEngine.SetActive(true);
-        _isImmobilizerActive = false;
+        _isImmobilizerPowerupActive = false;
         _laserPrefab.SetActive(true);
         _audioSource.volume = 1;
         GetComponent<Collider2D>().enabled = true;
@@ -372,32 +372,32 @@ public class Player : MonoBehaviour
         _speed = 5f;
     }
 
-    public void MultiShotActive()
+    public void MultiShotPowerupActive()
     { 
-        _isMultiShotActive = true;
+        _isMultiShotPowerupActive = true;
         StartCoroutine(MultiShotPowerDownRoutine());
     }
 
     IEnumerator MultiShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5f);
-        _isMultiShotActive = false;
+        _isMultiShotPowerupActive = false;
     }  
 
-    public void TripleShotActive()
+    public void TripleShotPowerupActive()
     {       
-        _isTripleShotActive = true;
+        _isTripleShotPowerupActive = true;
         StartCoroutine(TripleShotPowerDownRoutine());       
     }
  
     IEnumerator TripleShotPowerDownRoutine()
     { 
         yield return new WaitForSeconds(5.0f);
-        _isTripleShotActive = false;
+        _isTripleShotPowerupActive = false;
     }
-    public void SpeedBoostActive()
+    public void SpeedBoostPowerupActive()
     {
-        isSpeedBoostActive = true;
+        isSpeedBoostPowerupActive = true;
         _speed *= _speedMultiplier;
         StartCoroutine(SpeedBoostPowerDownRoutine());
     }
@@ -405,7 +405,7 @@ public class Player : MonoBehaviour
     IEnumerator SpeedBoostPowerDownRoutine()
     {
       yield return new WaitForSeconds(5.0f);
-        isSpeedBoostActive = false;
+        isSpeedBoostPowerupActive = false;
         _speed /= _speedMultiplier;
     }
 
