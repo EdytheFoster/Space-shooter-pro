@@ -56,8 +56,11 @@ public class Player : MonoBehaviour
     private float _thrusterFuel = 100f;
     [SerializeField]
     private float _thrusterRefuelSpeed = 2;
-
-
+    [SerializeField]
+    private AudioClip _laserSoundClip;
+    [SerializeField]
+    private AudioSource _audioSource;
+     
     public bool _isLaserPrefab = true;
     public bool _isThrusterActive = false;
     public bool _isTripleShotPowerupActive = false;
@@ -67,13 +70,6 @@ public class Player : MonoBehaviour
     public bool _isShipRepairPowerupActive = false;
     public bool _isMultiShotPowerupActive = false;
     public bool _isImmobilizerPowerupActive = false;
-    
-       
-    [SerializeField]
-    private AudioClip _laserSoundClip;
-    [SerializeField]
-    private AudioSource _audioSource;
-     
 
     // Start is called before the first frame update
     void Start()
@@ -87,8 +83,6 @@ public class Player : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _shieldSpriteRenderer = transform.Find("Shields").GetComponentInChildren<SpriteRenderer>();
         
-
-
 
         if (_spawnManager == null)
         {

@@ -19,6 +19,7 @@ TagManager:
   - Immobilizer
   - Fire_Shot
   - Power_Up
+  - Enemy_Shield
   layers:
   - Default
   - TransparentFX

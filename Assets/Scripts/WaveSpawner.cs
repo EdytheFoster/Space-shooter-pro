@@ -1,8 +1,16 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
+
+    
+    public List<GameObject> enemyList = new List<GameObject>();
+    public int[] _enemyTable = { 40, 20, 10, 10, 10, 5, 5 };
+    private int _enemyTotalWeight;
+    private int _enemyRandomNumber;
+
 
 
     public Player _player;
@@ -12,8 +20,8 @@ public class WaveSpawner : MonoBehaviour
     public class Wave
     {
         public string name;
-        public Transform enemy;
-        public Transform enemy2;
+        public GameObject enemy;
+        public GameObject enemy2;
         public int count;
         public float rate;
     }
@@ -42,6 +50,11 @@ public class WaveSpawner : MonoBehaviour
     void Start()
 
     {
+        foreach (var item in _enemyTable)
+        {
+            _enemyTotalWeight += item;
+        }
+
         waveCountdown = timeBetweenWaves;
     }
 
@@ -75,6 +88,25 @@ public class WaveSpawner : MonoBehaviour
             }
         }
 
+    }
+    void ChooseEnemy()
+    {
+        float randomX = Random.Range(-9.45f, 9.45f);
+
+        _enemyRandomNumber = Random.Range(0, _enemyTotalWeight);
+
+        for (int i = 0; i < _enemyTable.Length; i++)
+        {
+            if (_enemyRandomNumber <= _enemyTable[i])
+            {
+                Instantiate(enemyList[i], new Vector3(randomX, 7, 0), Quaternion.identity);
+                return;
+            }
+            else
+            {
+                _enemyRandomNumber -= _enemyTable[i];
+            }
+        }
     }
     void WaveCompleted()
     {
@@ -115,8 +147,9 @@ public class WaveSpawner : MonoBehaviour
         //Spawn
         for (int i = 0; i < _wave.count; i++)
         {
-            SpawnEnemy(_wave.enemy);
-            SpawnEnemy2(_wave.enemy2);
+            ChooseEnemy();
+            //SpawnEnemy(_wave.enemy);
+            //SpawnEnemy2(_wave.enemy2);
             
             
             yield return new WaitForSeconds(1f / _wave.rate);
@@ -126,7 +159,7 @@ public class WaveSpawner : MonoBehaviour
 
         yield break;
     }
-    void SpawnEnemy(Transform _enemy)
+    void SpawnEnemy(GameObject _enemy)
     {
         //Spawn enemy
         Debug.Log("Spawning enemy: " + _enemy.name);
@@ -137,7 +170,7 @@ public class WaveSpawner : MonoBehaviour
         
 
     }
-    void SpawnEnemy2(Transform _enemy2)
+    void SpawnEnemy2(GameObject _enemy2)
     {
         //Spawn enemy
         Debug.Log("Spawning enemy: " + _enemy2.name);

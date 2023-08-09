@@ -437,7 +437,7 @@ Transform:
   m_Children:
   - {fileID: 29811826}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475342946
 GameObject:
@@ -1150,25 +1150,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d77901b1095d887469b2195ccd4e3b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyList:
+  - {fileID: 4077475155324487626, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
+  - {fileID: 2359329010778269262, guid: 60e4743b7916d804fa907248697428f1, type: 3}
+  - {fileID: 213926484208836410, guid: 7c545b59a6fc6374186cb19a33099e6d, type: 3}
+  - {fileID: 66773652973505555, guid: 01c6638643b1a2a49b02eea91ceb9440, type: 3}
+  _enemyTable: 00000000000000000000000064000000000000000000000000000000
   _player: {fileID: 0}
   waves:
   - name: wave 1
-    enemy: {fileID: 688726816182699265, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
-    enemy2: {fileID: 5689541989243859461, guid: 60e4743b7916d804fa907248697428f1,
-      type: 3}
-    count: 1
+    enemy: {fileID: 0}
+    enemy2: {fileID: 0}
+    count: 3
     rate: 1
   - name: wave 2
-    enemy: {fileID: 688726816182699265, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
-    enemy2: {fileID: 5689541989243859461, guid: 60e4743b7916d804fa907248697428f1,
-      type: 3}
-    count: 2
+    enemy: {fileID: 0}
+    enemy2: {fileID: 0}
+    count: 5
     rate: 3
   - name: wave 3
-    enemy: {fileID: 688726816182699265, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
-    enemy2: {fileID: 5689541989243859461, guid: 60e4743b7916d804fa907248697428f1,
-      type: 3}
-    count: 2
+    enemy: {fileID: 0}
+    enemy2: {fileID: 0}
+    count: 5
     rate: 5
   spawnPoints:
   - {fileID: 1516415077}
@@ -1794,7 +1797,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1589737964
 GameObject:
@@ -2418,6 +2421,8 @@ MonoBehaviour:
   _waveSpawner: {fileID: 0}
   _thrusterFuel: 100
   _thrusterRefuelSpeed: 2
+  _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _audioSource: {fileID: 0}
   _isLaserPrefab: 1
   _isThrusterActive: 0
   _isTripleShotPowerupActive: 0
@@ -2427,8 +2432,6 @@ MonoBehaviour:
   _isShipRepairPowerupActive: 0
   _isMultiShotPowerupActive: 0
   _isImmobilizerPowerupActive: 0
-  _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
-  _audioSource: {fileID: 0}
 --- !u!212 &1915894100
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3649,7 +3652,7 @@ PrefabInstance:
     - target: {fileID: 8785667347980943644, guid: dbed81520d8656e4787f1ab20a589dd5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8785667347980943644, guid: dbed81520d8656e4787f1ab20a589dd5,
         type: 3}

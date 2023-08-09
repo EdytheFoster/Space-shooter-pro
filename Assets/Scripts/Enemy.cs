@@ -95,12 +95,10 @@ namespace NullConditionalOperator
             if (other.tag == "Player")
             {
                 Player player = other.transform.GetComponent<Player>();
-
                 if (player != null)
                 {
                     player.Damage();
                 }
-
                 GetComponent<Collider2D>().enabled = false;
                 _anim.SetTrigger("OnEnemyDeath");
                 _speed = 0;
@@ -109,18 +107,13 @@ namespace NullConditionalOperator
                 _audioSource.Play();
                 Destroy(this.gameObject, 2.4f);
             }
-
             if (other.tag == "Laser")
             {
                 Destroy(other.gameObject);
-
                 if (_player != null)
-
                 {
                     _player.AddScore(10);
                 }
-
-
                 GetComponent<Collider2D>().enabled = false;
                 _anim.SetTrigger("OnEnemyDeath");
                 _speed = 0;
