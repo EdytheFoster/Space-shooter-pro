@@ -6,15 +6,14 @@ public class Enemy4 : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4f;
-    [SerializeField]
-    private float _chaseSpeed = 6f;
-    [SerializeField]
-    private float _distance;
-    [SerializeField]
-    private float _distanceBetween;
     public Player _player;
     private Animator _anim;
     private AudioSource _audioSource;
+    [SerializeField]
+    private float _chaseSpeed = 6f;
+    private float _distance;
+    [SerializeField]
+    private float _distanceBetween;
 
 
     // Start is called before the first frame update

@@ -210,7 +210,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &97455980
 PrefabInstance:
@@ -1155,7 +1155,8 @@ MonoBehaviour:
   - {fileID: 2359329010778269262, guid: 60e4743b7916d804fa907248697428f1, type: 3}
   - {fileID: 213926484208836410, guid: 7c545b59a6fc6374186cb19a33099e6d, type: 3}
   - {fileID: 66773652973505555, guid: 01c6638643b1a2a49b02eea91ceb9440, type: 3}
-  _enemyTable: 00000000000000000000000064000000000000000000000000000000
+  - {fileID: 103484079476364934, guid: 1c0876511354cde48b235fef804fa27f, type: 3}
+  _enemyTable: 28000000190000000f0000000a0000000a0000000000000000000000
   _player: {fileID: 0}
   waves:
   - name: wave 1
@@ -2516,7 +2517,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009415865, y: 0.028643489}
+  m_Offset: {x: 0.009415865, y: 0.0021594763}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2527,7 +2528,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3696146, y: 4.3247156}
+  m_Size: {x: 3.3696146, y: 4.3776836}
   m_EdgeRadius: 0
 --- !u!82 &1915894103
 AudioSource:
@@ -3652,7 +3653,7 @@ PrefabInstance:
     - target: {fileID: 8785667347980943644, guid: dbed81520d8656e4787f1ab20a589dd5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8785667347980943644, guid: dbed81520d8656e4787f1ab20a589dd5,
         type: 3}
