@@ -20,6 +20,16 @@ public class Enemy3 : MonoBehaviour
     [SerializeField]
     private GameObject _enemyShieldVisualizer;
 
+    private float _distance;
+    [SerializeField]
+    private float _distanceBetween;
+    [SerializeField]
+    GameObject _powerUp;
+    [SerializeField]
+    Transform _fireShotPosition;
+
+    private bool ShootPowerup = true;
+
     private bool _isEnemyShieldVisualizerActive = true;
 
     // Start is called before the first frame update
@@ -49,13 +59,30 @@ public class Enemy3 : MonoBehaviour
     void Update()
     {
         CalculateMovement();
+        ShootPowerUp();
 
         if (Time.time > _canFire)
         {
             _fireRate = Random.Range(3f, 7f);
             _canFire = Time.time + _fireRate;
-            Instantiate(_fireShotPrefab, transform.position, Quaternion.identity);
+            Instantiate(_fireShotPrefab, _fireShotPosition.position, Quaternion.identity);
         }
+    }
+    void ShootPowerUp()
+    {
+        if (tag == "Power_Up")
+            if (ShootPowerup == true)
+            {
+
+
+                _distance = Vector3.Distance(transform.position, _powerUp.transform.position);
+                if (_distance < _distanceBetween)
+                {
+
+                    Instantiate(_fireShotPrefab, _fireShotPosition.position, Quaternion.identity);
+
+                }
+            }
     }
     void CalculateMovement()
     {

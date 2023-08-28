@@ -13,6 +13,10 @@ public class Powerup : MonoBehaviour
     private AudioClip _clip;
 
 
+    [SerializeField]
+    private GameObject _explosionPrefab;
+
+
 
 
 
@@ -30,6 +34,18 @@ public class Powerup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.tag == "Enemy_Laser")
+        { 
+            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
+        if (other.tag == "Fire_Shot")
+        {
+            Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
         if (other.tag == "Player")
         {
             Player player = other.transform.GetComponent<Player>();

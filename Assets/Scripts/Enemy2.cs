@@ -15,7 +15,15 @@ public class Enemy2 : MonoBehaviour
     public Player _player;
     private Animator _anim;
     private AudioSource _audioSource;
+    private float _distance;
+    [SerializeField]
+    private float _distanceBetween;
+    [SerializeField]
+    GameObject _powerUp;
+    [SerializeField]
+    Transform _fireShotPosition;
 
+    private bool ShootPowerup = true;
 
     // Start is called before the first frame update
     void Start()
@@ -52,8 +60,24 @@ public class Enemy2 : MonoBehaviour
         {
             _fireRate = Random.Range(3f, 7f);
             _canFire = Time.time + _fireRate;
-            Instantiate(_fireShotPrefab, transform.position, Quaternion.identity);
+            Instantiate(_fireShotPrefab, _fireShotPosition.position, Quaternion.identity);
         }
+    }
+    void ShootPowerUp()
+    {
+        if (tag == "Power_Up")
+            if (ShootPowerup == true)
+            {
+
+
+                _distance = Vector3.Distance(transform.position, _powerUp.transform.position);
+                if (_distance < _distanceBetween)
+                {
+
+                    Instantiate(_fireShotPrefab, _fireShotPosition.position, Quaternion.identity);
+
+                }
+            }
     }
 
     void CalculateMovement()

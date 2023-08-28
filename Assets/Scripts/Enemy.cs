@@ -14,7 +14,7 @@ namespace NullConditionalOperator
         [SerializeField]
         private float _frequency = 4.0f;
         [SerializeField]
-        private GameObject _laserPrefab;
+        private GameObject _enemyLaserPrefab;
         [SerializeField]
         private float _fireRate = 3.0f;
         [SerializeField]
@@ -22,11 +22,19 @@ namespace NullConditionalOperator
         public Player _player;
         private Animator _anim;
         private AudioSource _audioSource;
+        [SerializeField]
+        Transform _laserShotPosition;
+        private float _distance;
+        [SerializeField]
+        private float _distanceBetween;
+        [SerializeField]
+        GameObject _powerUp;
 
-
+        private bool ShootPowerup = true;
         // Start is called before the first frame update
         void Start()
         {
+            GameObject.FindGameObjectWithTag("Power_Up");
             _position = transform.position;
             _axis = transform.right;
             _player = GameObject.Find("Player")?.GetComponent<Player>();
@@ -56,20 +64,37 @@ namespace NullConditionalOperator
         {
             ZigZagMovement();
             CalculateMovement();
+            ShootPowerUp();
 
 
-            if (Time.time > _canFire)
-            {
-                _fireRate = Random.Range(3f, 7f);
-                _canFire = Time.time + _fireRate;
-                GameObject enemyLaser = Instantiate(_laserPrefab, transform.position, Quaternion.identity);
-                Laser[] lasers = enemyLaser.GetComponentsInChildren<Laser>();
+            if (_player != null)
 
-                for (int i = 0; i < lasers.Length; i++)
+
+                if (Time.time > _canFire)
                 {
-                    lasers[i].AssignEnemyLaser();
+                    _fireRate = Random.Range(3f, 7f);
+                    _canFire = Time.time + _fireRate;
+                    Instantiate(_enemyLaserPrefab, _laserShotPosition.position, Quaternion.identity);
+
+
                 }
-            }
+        }
+
+        void ShootPowerUp()
+        {
+            if (tag == "Power_Up")
+                if (ShootPowerup == true)
+                {
+                    
+                    
+                    _distance = Vector3.Distance(transform.position, _powerUp.transform.position);
+                    if (_distance < _distanceBetween)
+                    {
+
+                        Instantiate(_enemyLaserPrefab, _laserShotPosition.position, Quaternion.identity);                       
+
+                    }
+                }
         }
 
         void CalculateMovement()

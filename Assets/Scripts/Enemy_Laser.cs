@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireShot : MonoBehaviour
+public class Enemy_Laser : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 8f;
@@ -10,7 +10,8 @@ public class FireShot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
+
     }
 
     // Update is called once per frame
@@ -22,20 +23,9 @@ public class FireShot : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (transform.position.y >= 8)
-        {
-            Destroy(gameObject);
-        }
-        if (transform.position.x <= -12)
-        { 
-            Destroy(gameObject);
-        }
-        if (transform.position.x >= 12)
-        {
-            Destroy(gameObject);
-        }
 
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")

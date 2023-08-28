@@ -24,6 +24,9 @@ public class Enemy5 : MonoBehaviour
     [SerializeField]
     private float _distanceBetween;
     Quaternion _initialRotation;
+    [SerializeField]
+    Transform _fireShotPosition;
+    
 
 
     // Start is called before the first frame update
@@ -85,6 +88,7 @@ public class Enemy5 : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+
     }
 
     private void RotateToPlayer()
@@ -109,7 +113,7 @@ public class Enemy5 : MonoBehaviour
                     {
                         _fireRate = 3f;
                         _canFire = Time.time + _fireRate;
-                        Instantiate(_fireShotPrefab, transform.position, quaternion);
+                        Instantiate(_fireShotPrefab, _fireShotPosition.position, quaternion);
                     }
                   
                 }
