@@ -60,9 +60,15 @@ public class Player : MonoBehaviour
     private AudioClip _laserSoundClip;
     [SerializeField]
     private AudioSource _audioSource;
-     
+    [SerializeField]
+    private GameObject _missilePrefab;
+    
+
+
+    public bool _isMissilePrefab = true;
     public bool _isLaserPrefab = true;
     public bool _isThrusterActive = false;
+    public bool _isMissilePowerupActive = false;
     public bool _isTripleShotPowerupActive = false;
     public bool  isSpeedBoostPowerupActive = false;
     public bool _isShieldsPowerupActive = false;
@@ -83,6 +89,7 @@ public class Player : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _shieldSpriteRenderer = transform.Find("Shields").GetComponentInChildren<SpriteRenderer>();
         
+
 
         if (_spawnManager == null)
         {
@@ -262,6 +269,15 @@ public class Player : MonoBehaviour
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -45f));
             Instantiate(_MultiShotPrefab, transform.position, Quaternion.Euler(0f, 0f, -60f));
         }
+        else
+
+            if (_isMissilePowerupActive == true)           
+            {
+                Instantiate(_missilePrefab, transform.position, Quaternion.identity);
+            }
+
+        
+
 
         else
 
@@ -364,6 +380,18 @@ public class Player : MonoBehaviour
         GetComponent<Collider2D>().enabled = true;
         
         _speed = 5f;
+    }
+
+    public void MissilePowerupActive()
+    {
+        _isMissilePowerupActive = true;
+        StartCoroutine(MissilePowerDownRoutine());
+    }
+
+    IEnumerator MissilePowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5f);
+        _isMissilePowerupActive = false;
     }
 
     public void MultiShotPowerupActive()

@@ -114,6 +114,10 @@ namespace NullConditionalOperator
             transform.position = _position + _axis * Mathf.Cos(Time.time * _frequency) * _amplitude;
 
         }
+        //public void Dodge(float value)
+        //{ 
+            //transform.position = new Vector2(transform.position.x + value, transform.position.y);
+        //}
 
         private void OnTriggerEnter2D(Collider2D other)
         {

@@ -72,7 +72,7 @@ public class Enemy5 : MonoBehaviour
             {
                 _fireRate = Random.Range(3f, 7f);
                 _canFire = Time.time + _fireRate;
-                Instantiate(_fireShotPrefab, transform.position, Quaternion.identity);
+                Instantiate(_fireShotPrefab, _fireShotPosition.position, Quaternion.identity);
                 
 
             }

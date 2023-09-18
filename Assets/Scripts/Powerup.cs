@@ -16,8 +16,14 @@ public class Powerup : MonoBehaviour
     [SerializeField]
     private GameObject _explosionPrefab;
 
+    [SerializeField]
+    private GameObject _player;
 
 
+    private void Start()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+    }
 
 
     // Update is called once per frame
@@ -29,6 +35,15 @@ public class Powerup : MonoBehaviour
         if (transform.position.y < -6.4f)
         {
             Destroy(this.gameObject);
+        }
+
+        MoveTowardPlayer();
+    }
+    void MoveTowardPlayer()
+    {
+        if (Input.GetKey(KeyCode.C))
+        {
+            transform.position = Vector3.Lerp(this.transform.position, _player.transform.position, 3f * Time.deltaTime);
         }
     }
 
@@ -75,6 +90,9 @@ public class Powerup : MonoBehaviour
                         break;
                     case 6:
                         player.ImmobilizerPowerupActive();
+                        break;
+                    case 7:
+                        player.MissilePowerupActive();
                         break;
                     default:
                         Debug.Log("default value");

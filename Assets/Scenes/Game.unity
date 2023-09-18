@@ -1121,7 +1121,8 @@ MonoBehaviour:
   - {fileID: 2209469672080296555, guid: b06af9e9332586e4696fe5989dc8e706, type: 3}
   - {fileID: 8552257468013271630, guid: 969c86a16a14abf43afd9729e2bd1f22, type: 3}
   - {fileID: 5381328239738973417, guid: fdd1b3224cb59dd40b66d82bff861f4d, type: 3}
-  powerupsTable: 28000000140000000a0000000a0000000a0000000500000005000000
+  - {fileID: 7711491343372204502, guid: 15f2a6506b4af5f41a871d617f90448d, type: 3}
+  powerupsTable: 2800000014000000050000000a000000050000000a0000000500000005000000
 --- !u!4 &1009009095
 Transform:
   m_ObjectHideFlags: 0
@@ -1152,11 +1153,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList:
   - {fileID: 4077475155324487626, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
+  - {fileID: 162820015390165314, guid: 4d80826ce5d48cd49bc0d1655b120090, type: 3}
   - {fileID: 2359329010778269262, guid: 60e4743b7916d804fa907248697428f1, type: 3}
   - {fileID: 213926484208836410, guid: 7c545b59a6fc6374186cb19a33099e6d, type: 3}
   - {fileID: 66773652973505555, guid: 01c6638643b1a2a49b02eea91ceb9440, type: 3}
   - {fileID: 103484079476364934, guid: 1c0876511354cde48b235fef804fa27f, type: 3}
-  _enemyTable: 28000000190000000f0000000a0000000a0000000000000000000000
+  _enemyTable: 1400000019000000140000000f0000000a0000000a00000000000000
   _player: {fileID: 0}
   waves:
   - name: wave 1
@@ -2424,8 +2426,12 @@ MonoBehaviour:
   _thrusterRefuelSpeed: 2
   _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _audioSource: {fileID: 0}
+  _missilePrefab: {fileID: 8092821575257013024, guid: 895f78e7479249b4da27f07eea5d606c,
+    type: 3}
+  _isMissilePrefab: 1
   _isLaserPrefab: 1
   _isThrusterActive: 0
+  _isMissilePowerupActive: 0
   _isTripleShotPowerupActive: 0
   isSpeedBoostPowerupActive: 0
   _isShieldsPowerupActive: 0
