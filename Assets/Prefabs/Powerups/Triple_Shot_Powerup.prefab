@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3131404426011067404
 Transform:
   m_ObjectHideFlags: 0
@@ -139,6 +139,7 @@ MonoBehaviour:
   _clip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
   _explosionPrefab: {fileID: 1675148644758600681, guid: 75f186b11dcc96c45b216f56364df1f9,
     type: 3}
+  _player: {fileID: 0}
 --- !u!95 &208232
 Animator:
   serializedVersion: 3

@@ -70,5 +70,9 @@ public class SpawnManager : MonoBehaviour
     {
         _stopSpawning = true;
     }
+    public void OnEnemyBossDeath()
+    {
+        _stopSpawning = true;
+    }
 
 }

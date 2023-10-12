@@ -22,6 +22,8 @@ TagManager:
   - Enemy_Shield
   - Laser_Detector
   - Missile
+  - Enemy_Boss
+  - Boss_Hit_Area
   layers:
   - Default
   - TransparentFX

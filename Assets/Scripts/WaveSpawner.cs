@@ -1,182 +1,89 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[System.Serializable]
+public class Wave
+{
+    public string name;
+    public int count;
+    public GameObject[] typeOfEnemies;
+    public float spawnInterval;
+    public float rate;
+}
+
+
 
 public class WaveSpawner : MonoBehaviour
 {
+    public Wave[] waves;
+    public Transform[] spawnPoints;
 
+    private Wave _currentWave;
+    private int _currentWaveNumber;
+    private float _nextSpawnTime;
+
+    private bool _canSpawn = true;
+    public bool _stopSpawning = false;
     
-    public List<GameObject> enemyList = new List<GameObject>();
-    public int[] _enemyTable = { 40, 20, 10, 10, 10, 5, 5 };
-    private int _enemyTotalWeight;
-    private int _enemyRandomNumber;
-
-
+    
 
     public Player _player;
-    public enum SpawnState { Spawning, Waiting, Counting };
-
-    [System.Serializable]
-    public class Wave
-    {
-        public string name;
-        public GameObject enemy;
-        public GameObject enemy2;
-        public int count;
-        public float rate;
-    }
-
-    public Wave[] waves;
-    private int _nextWave = 0;
-    public Transform[] spawnPoints;
-    public float timeBetweenWaves = 5f;
-    public float waveCountdown;
-
-    private float _searchCountdown = 1f;
-
-    public SpawnState state = SpawnState.Counting;
-
-    private bool _spawning = false;
-    public void StartSpawning(bool state)
-    {
-        if (state == false)
-        {
-            StopAllCoroutines();
-        }
-
-        _spawning = state;
-    }
-
     void Start()
-
     {
-        foreach (var item in _enemyTable)
-        {
-            _enemyTotalWeight += item;
-        }
 
-        waveCountdown = timeBetweenWaves;
+    }
+    public void StartSpawning()
+    {
+        StartCoroutine(SpawnWaveRoutine());
     }
 
     void Update()
     {
-        if (_spawning == true)
+        _currentWave = waves[_currentWaveNumber];
+        //SpawnWave();
+        GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (totalEnemies.Length == 0 && !_canSpawn && _currentWaveNumber + 1 != waves.Length)
         {
-            if (waveCountdown <= 0)
-            {
-                if (state == SpawnState.Waiting)
-                {
-                    if (!EnemyIsAlive())
-                    
-                    {
-                        WaveCompleted();
-                    }
-                    else
-                    {
-                        return;
-                    }
-
-                }
-                if (state != SpawnState.Spawning)
-                {
-                    StartCoroutine(SpawnWave(waves[_nextWave]));
-                }
-            }
-            else
-            {
-                waveCountdown -= Time.deltaTime;
-            }
+            _currentWaveNumber++;
+            _canSpawn = true;
         }
-
     }
-    void ChooseEnemy()
+    IEnumerator SpawnWaveRoutine()
     {
-        float randomX = Random.Range(-9.45f, 9.45f);
+        yield return new WaitForSeconds(3.0f);
 
-        _enemyRandomNumber = Random.Range(0, _enemyTotalWeight);
-
-        for (int i = 0; i < _enemyTable.Length; i++)
+        while (_stopSpawning == false)
         {
-            if (_enemyRandomNumber <= _enemyTable[i])
+            SpawnWave();
+            yield return new WaitForSeconds(1);
+        }
+    }
+    public void SpawnWave()
+    {
+
+
+            if (_canSpawn && _nextSpawnTime < Time.time)
+        {
+            GameObject randomEnemy = _currentWave.typeOfEnemies[Random.Range(0, _currentWave.typeOfEnemies.Length)];
+            Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            Instantiate(randomEnemy, randomPoint.position, Quaternion.identity);
+            _currentWave.count--;
+            _nextSpawnTime = Time.time + _currentWave.spawnInterval;
+            if (_currentWave.count == 0)
             {
-                Instantiate(enemyList[i], new Vector3(randomX, 7, 0), Quaternion.identity);
-                return;
-            }
-            else
-            {
-                _enemyRandomNumber -= _enemyTable[i];
+                _canSpawn = false;
             }
         }
     }
-    void WaveCompleted()
+    public void OnPlayerDeath()
     {
-        Debug.Log("Wave Completed");
-
-        state = SpawnState.Counting;
-        waveCountdown = timeBetweenWaves;
-
-        if (_nextWave + 1 > waves.Length - 1)
-        {
-            _nextWave = 2;
-            Debug.Log("Completed All Waves");
-        }
-        else
-        {
-            _nextWave++;
-        }
+        _stopSpawning = true;
     }
-
-    bool EnemyIsAlive()
+    public void OnEnemyBossDeath()
     {
-        _searchCountdown -= Time.deltaTime;
-        if (_searchCountdown <= 0)
-        {
-            _searchCountdown = 1f;
-            if (GameObject.FindGameObjectWithTag("Enemy") == null)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        _stopSpawning = true;
     }
-    IEnumerator SpawnWave(Wave _wave)
-    {
-        Debug.Log("Spawning Wave" + _wave.name);
-        state = SpawnState.Spawning;
-        //Spawn
-        for (int i = 0; i < _wave.count; i++)
-        {
-            ChooseEnemy();
-            //SpawnEnemy(_wave.enemy);
-            //SpawnEnemy2(_wave.enemy2);
-            
-            
-            yield return new WaitForSeconds(1f / _wave.rate);
-        }
+}    
 
-        state = SpawnState.Waiting;
 
-        yield break;
-    }
-    void SpawnEnemy(GameObject _enemy)
-    {
-        //Spawn enemy
-        Debug.Log("Spawning enemy: " + _enemy.name);
 
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(_enemy, _sp.position, _sp.rotation);
-        
-        
-
-    }
-    void SpawnEnemy2(GameObject _enemy2)
-    {
-        //Spawn enemy
-        Debug.Log("Spawning enemy: " + _enemy2.name);
-
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(_enemy2, _sp.position, _sp.rotation);
-
-    }
-}

@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _restartText;
     [SerializeField]
+    private Text _youWinText;
+    [SerializeField]
+    private Text _settingsScreenText;
+    [SerializeField]
     private GameManager _gameManager;
     [SerializeField]
     private Text _ammoText;
@@ -29,6 +33,7 @@ public class UIManager : MonoBehaviour
     {
         _scoreText.text = "Score: " + 00;
         _gameOverText.gameObject.SetActive(false);
+        _youWinText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
         if (_gameManager == null)
@@ -84,5 +89,27 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
-    
+
+
+    public void YouWinSequence()
+    {
+        _gameManager.YouWin();
+        _youWinText.gameObject.SetActive(true);
+        _restartText.gameObject.SetActive(true);
+        _settingsScreenText.gameObject.SetActive(true);
+        StartCoroutine(YouWinFlickerRoutine());
+
+    }
+
+    IEnumerator YouWinFlickerRoutine()
+    {
+        while (true)
+        {
+            _youWinText.text = "YOU WIN!";
+            yield return new WaitForSeconds(0.5f);
+            _youWinText.text = "";
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
 }

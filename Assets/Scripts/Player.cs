@@ -348,7 +348,7 @@ public class Player : MonoBehaviour
         {
             GetComponent<Collider2D>().enabled = false;
             _spawnManager.OnPlayerDeath();
-            _waveSpawner.StartSpawning(false);
+            _waveSpawner.OnPlayerDeath();
             Destroy(this.gameObject);
         }
     }
