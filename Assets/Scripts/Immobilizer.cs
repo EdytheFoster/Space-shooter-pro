@@ -6,14 +6,11 @@ public class Immobilizer : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 3f;
-
     [SerializeField]
     private AudioClip _clip;
-
     [SerializeField]
     private GameObject _immobilizerPrefab;
 
-    
     void Update()
     {
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
@@ -35,9 +32,7 @@ public class Immobilizer : MonoBehaviour
             {
                 player.ImmobilizerPowerupActive();
             }
-
             Destroy(this.gameObject);
         }
-
     }
 }

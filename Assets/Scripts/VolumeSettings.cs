@@ -12,16 +12,14 @@ public class VolumeSettings : MonoBehaviour
     private Slider _backgroundMusicSlider;
     [SerializeField]
     private Slider _explosionsSlider;
-  
 
     public const string MIXER_MUSIC = "Background Music";
     public const string MIXER_EXPLOSIONS = "Explosions";
-   
 
     private void Awake()
     {
         _backgroundMusicSlider.onValueChanged.AddListener(SetBackgroundMusic);
-        _explosionsSlider.onValueChanged.AddListener(SetExplosions);     
+        _explosionsSlider.onValueChanged.AddListener(SetExplosions);
     }
 
     private void Start()
@@ -46,8 +44,4 @@ public class VolumeSettings : MonoBehaviour
     {
         _mixer.SetFloat(MIXER_EXPLOSIONS, Mathf.Log10(value) * 20);
     }
-    
-    
-
-
 }

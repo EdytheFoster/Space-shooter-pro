@@ -7,18 +7,11 @@ public class Laser : MonoBehaviour
     [SerializeField]
     private float _speed = 8f;
 
-
-
-
-
     // Update is called once per frame
     void Update()
     {
-
-            MoveUp();
-
+        MoveUp();
     }
-
 
     void MoveUp()
     {
@@ -26,14 +19,11 @@ public class Laser : MonoBehaviour
 
         if (transform.position.y >= 8)
         {
-         if (transform.parent != null)
-         {
-            Destroy(transform.parent.gameObject);
-         }
-
+            if (transform.parent != null)
+            {
+                Destroy(transform.parent.gameObject);
+            }
             Destroy(gameObject);
         }
     }
-
-                
 }

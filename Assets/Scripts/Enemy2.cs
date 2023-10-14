@@ -35,7 +35,6 @@ public class Enemy2 : MonoBehaviour
             Debug.LogError("The Player is NULL.");
         }
 
-
         _anim = GetComponent<Animator>();
 
         if (_anim == null)
@@ -47,14 +46,12 @@ public class Enemy2 : MonoBehaviour
         {
             Debug.LogError("The audio source on the enemy is NULL.");
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
         CalculateMovement();
-
 
         if (Time.time > _canFire)
         {
@@ -68,14 +65,10 @@ public class Enemy2 : MonoBehaviour
         if (tag == "Power_Up")
             if (ShootPowerup == true)
             {
-
-
                 _distance = Vector3.Distance(transform.position, _powerUp.transform.position);
                 if (_distance < _distanceBetween)
                 {
-
                     Instantiate(_fireShotPrefab, _fireShotPosition.position, Quaternion.identity);
-
                 }
             }
     }
@@ -89,7 +82,6 @@ public class Enemy2 : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -115,11 +107,9 @@ public class Enemy2 : MonoBehaviour
             Destroy(other.gameObject);
 
             if (_player != null)
-
             {
                 _player.AddScore(10);
             }
-
 
             GetComponent<Collider2D>().enabled = false;
             _anim.SetTrigger("OnEnemyDeath");
@@ -127,7 +117,6 @@ public class Enemy2 : MonoBehaviour
             _audioSource.Play();
             Destroy(this.gameObject, 2.4f);
         }
-
     }
 }
 

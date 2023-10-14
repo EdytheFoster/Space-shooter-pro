@@ -11,36 +11,25 @@ public class Wave
     public float rate;
 }
 
-
-
 public class WaveSpawner : MonoBehaviour
 {
     public Wave[] waves;
     public Transform[] spawnPoints;
-
     private Wave _currentWave;
     private int _currentWaveNumber;
     private float _nextSpawnTime;
-
     private bool _canSpawn = true;
     public bool _stopSpawning = false;
-    
-    
 
     public Player _player;
-    void Start()
-    {
 
-    }
     public void StartSpawning()
     {
         StartCoroutine(SpawnWaveRoutine());
     }
-
     void Update()
     {
         _currentWave = waves[_currentWaveNumber];
-        //SpawnWave();
         GameObject[] totalEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         if (totalEnemies.Length == 0 && !_canSpawn && _currentWaveNumber + 1 != waves.Length)
         {
@@ -51,7 +40,6 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator SpawnWaveRoutine()
     {
         yield return new WaitForSeconds(3.0f);
-
         while (_stopSpawning == false)
         {
             SpawnWave();
@@ -60,9 +48,7 @@ public class WaveSpawner : MonoBehaviour
     }
     public void SpawnWave()
     {
-
-
-            if (_canSpawn && _nextSpawnTime < Time.time)
+        if (_canSpawn && _nextSpawnTime < Time.time)
         {
             GameObject randomEnemy = _currentWave.typeOfEnemies[Random.Range(0, _currentWave.typeOfEnemies.Length)];
             Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];

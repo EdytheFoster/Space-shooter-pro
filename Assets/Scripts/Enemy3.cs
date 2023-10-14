@@ -19,7 +19,6 @@ public class Enemy3 : MonoBehaviour
     private GameObject _enemyThruster;
     [SerializeField]
     private GameObject _enemyShieldVisualizer;
-
     private float _distance;
     [SerializeField]
     private float _distanceBetween;
@@ -29,7 +28,6 @@ public class Enemy3 : MonoBehaviour
     Transform _fireShotPosition;
 
     private bool ShootPowerup = true;
-
     private bool _isEnemyShieldVisualizerActive = true;
 
     // Start is called before the first frame update
@@ -73,14 +71,10 @@ public class Enemy3 : MonoBehaviour
         if (tag == "Power_Up")
             if (ShootPowerup == true)
             {
-
-
                 _distance = Vector3.Distance(transform.position, _powerUp.transform.position);
                 if (_distance < _distanceBetween)
                 {
-
                     Instantiate(_fireShotPrefab, _fireShotPosition.position, Quaternion.identity);
-
                 }
             }
     }
@@ -94,8 +88,6 @@ public class Enemy3 : MonoBehaviour
         }
     }
 
-
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -103,17 +95,15 @@ public class Enemy3 : MonoBehaviour
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
             {
-
                 if (_isEnemyShieldVisualizerActive == true)
                 {
                     player.Damage();
                     _enemyShieldVisualizer.SetActive(false);
                     _isEnemyShieldVisualizerActive = false;
                 }
-                else 
+                else
                 {
                     player.Damage();
-
                     GetComponent<Collider2D>().enabled = false;
                     _anim.SetTrigger("OnEnemyDeath");
                     _speed = 0;
@@ -131,19 +121,16 @@ public class Enemy3 : MonoBehaviour
                 if (_player != null)
                 {
                     _enemyShieldVisualizer.SetActive(false);
-                    _isEnemyShieldVisualizerActive = false;                    
-                  
+                    _isEnemyShieldVisualizerActive = false;
                 }
             }
             else
             {
                 if (_player != null)
-
                 {
                     _player.AddScore(10);
                 }
                 Destroy(other.gameObject);
-
                 GetComponent<Collider2D>().enabled = false;
                 _anim.SetTrigger("OnEnemyDeath");
                 _speed = 0;
@@ -151,6 +138,5 @@ public class Enemy3 : MonoBehaviour
                 _enemyThruster.SetActive(false);
                 Destroy(this.gameObject, 2.4f);
             }
-
     }
 }

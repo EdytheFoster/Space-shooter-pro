@@ -6,13 +6,10 @@ public class Multi_Shot_Powerup : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 3f;
-
     [SerializeField]
     private AudioClip _clip;
-
     [SerializeField]
     private GameObject _multi_Shot_PowerupPrefab;
-
 
     // Update is called once per frame
     void Update()
@@ -36,10 +33,7 @@ public class Multi_Shot_Powerup : MonoBehaviour
             {
                 player.MultiShotPowerupActive();
             }
-
             Destroy(this.gameObject);
         }
-
     }
-
 }

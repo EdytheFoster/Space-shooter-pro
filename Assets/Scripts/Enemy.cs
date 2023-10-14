@@ -44,7 +44,6 @@ namespace NullConditionalOperator
                 Debug.LogError("The Player is NULL.");
             }
 
-
             _anim = GetComponent<Animator>();
 
             if (_anim == null)
@@ -66,37 +65,27 @@ namespace NullConditionalOperator
             CalculateMovement();
             ShootPowerUp();
 
-
             if (_player != null)
-
 
                 if (Time.time > _canFire)
                 {
                     _fireRate = Random.Range(3f, 7f);
                     _canFire = Time.time + _fireRate;
                     Instantiate(_enemyLaserPrefab, _laserShotPosition.position, Quaternion.identity);
-
-
                 }
         }
-
         void ShootPowerUp()
         {
             if (tag == "Power_Up")
                 if (ShootPowerup == true)
                 {
-                    
-                    
                     _distance = Vector3.Distance(transform.position, _powerUp.transform.position);
                     if (_distance < _distanceBetween)
                     {
-
-                        Instantiate(_enemyLaserPrefab, _laserShotPosition.position, Quaternion.identity);                       
-
+                        Instantiate(_enemyLaserPrefab, _laserShotPosition.position, Quaternion.identity);
                     }
                 }
         }
-
         void CalculateMovement()
         {
             transform.Translate(Vector3.down * _speed * Time.deltaTime);
@@ -105,16 +94,13 @@ namespace NullConditionalOperator
             {
                 Destroy(this.gameObject);
             }
-
         }
 
         void ZigZagMovement()
         {
             _position += Vector3.down * Time.deltaTime * _speed;
             transform.position = _position + _axis * Mathf.Cos(Time.time * _frequency) * _amplitude;
-
         }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.tag == "Player")

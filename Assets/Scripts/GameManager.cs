@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     private bool _isGameOver;
     [SerializeField]
     private bool _isYouWin;
- 
-   
+
     // Update is called once per frame
     private void Update()
     {
@@ -20,22 +19,16 @@ public class GameManager : MonoBehaviour
         }
         else
         if (Input.GetKeyDown(KeyCode.R) && _isYouWin == true)
-        { 
+        {
             SceneManager.LoadScene(1);
         }
-
-
-
     }
-
     public void GameOver()
     {
         _isGameOver = true;
     }
     public void YouWin()
     {
-        _isYouWin = true;     
+        _isYouWin = true;
     }
-
-
 }

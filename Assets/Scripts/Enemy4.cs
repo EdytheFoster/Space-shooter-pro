@@ -15,7 +15,6 @@ public class Enemy4 : MonoBehaviour
     [SerializeField]
     private float _distanceBetween;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +36,6 @@ public class Enemy4 : MonoBehaviour
         {
             Debug.LogError("The audio source on the enemy is NULL.");
         }
-
     }
 
     // Update is called once per frame

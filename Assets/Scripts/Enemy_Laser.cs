@@ -7,12 +7,6 @@ public class Enemy_Laser : MonoBehaviour
     [SerializeField]
     private float _speed = 8f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -23,7 +17,6 @@ public class Enemy_Laser : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)

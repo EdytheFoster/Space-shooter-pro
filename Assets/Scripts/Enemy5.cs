@@ -26,8 +26,6 @@ public class Enemy5 : MonoBehaviour
     Quaternion _initialRotation;
     [SerializeField]
     Transform _fireShotPosition;
-    
-
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +36,6 @@ public class Enemy5 : MonoBehaviour
         {
             Debug.LogError("The Player is NULL.");
         }
-
 
         _anim = GetComponent<Animator>();
 
@@ -53,10 +50,7 @@ public class Enemy5 : MonoBehaviour
         }
 
         _initialRotation = transform.rotation;
-
     }
-
-
 
     // Update is called once per frame
     void Update()
@@ -64,19 +58,14 @@ public class Enemy5 : MonoBehaviour
         CalculateMovement();
         RotateToPlayer();
 
-
         if (_player != null)
-
 
             if (Time.time > _canFire)
             {
                 _fireRate = Random.Range(3f, 7f);
                 _canFire = Time.time + _fireRate;
                 Instantiate(_fireShotPrefab, _fireShotPosition.position, Quaternion.identity);
-                
-
             }
-
     }
 
     void CalculateMovement()
@@ -87,18 +76,14 @@ public class Enemy5 : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-
     }
 
     private void RotateToPlayer()
     {
         if (_player != null)
         {
-
             if (transform.position.y < _player.transform.position.y - 3f)
             {
-
                 _distance = Vector3.Distance(transform.position, _player.transform.position);
 
                 if (_distance < _distanceBetween)
@@ -115,9 +100,7 @@ public class Enemy5 : MonoBehaviour
                         _canFire = Time.time + _fireRate;
                         Instantiate(_fireShotPrefab, _fireShotPosition.position, quaternion);
                     }
-                  
                 }
-
             }
         }
         if (_distance > _distanceBetween)
@@ -131,10 +114,7 @@ public class Enemy5 : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-
     }
-
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -163,6 +143,5 @@ public class Enemy5 : MonoBehaviour
             _audioSource.Play();
             Destroy(this.gameObject, 2.4f);
         }
-
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour
 {
-    
+
     private Rigidbody2D _rb;
     [SerializeField]
     private float _speed = 5f;
@@ -36,8 +36,6 @@ public class Missile : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-
     }
     void FixedUpdate()
     {
@@ -55,13 +53,10 @@ public class Missile : MonoBehaviour
         if (_target == null)
         {
             transform.Translate(Vector3.up * _speed * Time.deltaTime);
-
         }
-      
     }
 
     private void OnTriggerEnter2D(Collider2D other)
-         
     {
         if ("Enemy" != null)
         {

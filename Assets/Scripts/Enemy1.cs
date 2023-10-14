@@ -35,7 +35,6 @@ public class Enemy1 : MonoBehaviour
             Debug.LogError("The Player is NULL.");
         }
 
-
         _anim = GetComponent<Animator>();
 
         if (_anim == null)
@@ -47,28 +46,21 @@ public class Enemy1 : MonoBehaviour
         {
             Debug.LogError("The audio source on the enemy is NULL.");
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
         CalculateMovement();
         ShootPowerUp();
 
-
-
         if (_player != null)
-
 
             if (Time.time > _canFire)
             {
                 _fireRate = Random.Range(3f, 7f);
                 _canFire = Time.time + _fireRate;
                 Instantiate(_enemyLaserPrefab, _laserShotPosition.position, Quaternion.identity);
-
-
             }
     }
 
@@ -77,14 +69,10 @@ public class Enemy1 : MonoBehaviour
         if (tag == "Power_Up")
             if (ShootPowerup == true)
             {
-
-
                 _distance = Vector3.Distance(transform.position, _powerUp.transform.position);
                 if (_distance < _distanceBetween)
                 {
-
                     Instantiate(_enemyLaserPrefab, _laserShotPosition.position, Quaternion.identity);
-
                 }
             }
     }
@@ -97,7 +85,6 @@ public class Enemy1 : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
     }
 
     public void Dodge(float value)
@@ -117,8 +104,6 @@ public class Enemy1 : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
-            //_amplitude = 0;
-            //_frequency = 0;
             _audioSource.Play();
             Destroy(this.gameObject, 2.4f);
         }
@@ -132,12 +117,9 @@ public class Enemy1 : MonoBehaviour
             GetComponent<Collider2D>().enabled = false;
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
-            //_amplitude = 0;
-            //_frequency = 0;
             _audioSource.Play();
             Destroy(this.gameObject, 2.4f);
         }
-
     }
 }
 

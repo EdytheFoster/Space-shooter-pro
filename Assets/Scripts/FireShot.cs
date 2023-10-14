@@ -7,11 +7,6 @@ public class FireShot : MonoBehaviour
     [SerializeField]
     private float _speed = 8f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -27,14 +22,13 @@ public class FireShot : MonoBehaviour
             Destroy(gameObject);
         }
         if (transform.position.x <= -12)
-        { 
+        {
             Destroy(gameObject);
         }
         if (transform.position.x >= 12)
         {
             Destroy(gameObject);
         }
-
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

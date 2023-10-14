@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] 
+    [SerializeField]
     private Text _scoreText;
     [SerializeField]
     private Image _LivesImg;
@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     private Text _ammoText;
     [SerializeField]
     private Slider _thrusterFuelSlider;
-             
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,48 +40,38 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogError("GameManager is NULL.");
         }
-        
     }
     public void UpdateThrusterFuel(float value)
     {
         _thrusterFuelSlider.value = value;
     }
-   
-
     public void UpdateAmmoCount(int AmmoCount, int MaxAmmo)
     {
         _ammoText.text = "Ammo: " + AmmoCount + "/" + MaxAmmo;
     }
-
     public void UpdateScore(int PlayerScore)
     {
         _scoreText.text = "Score: " + PlayerScore;
     }
-
     public void UpdateLives(int currentLives)
     {
-      
         _LivesImg.sprite = _liveSprites[Mathf.Clamp(currentLives, 0, 3)];
 
         if (currentLives < 1)
         {
             GameOverSequence();
-            
         }
     }
-
     void GameOverSequence()
     {
         _gameManager.GameOver();
         _gameOverText.gameObject.SetActive(true);
         _restartText.gameObject.SetActive(true);
         StartCoroutine(GameOverFlickerRoutine());
-
     }
-   
     IEnumerator GameOverFlickerRoutine()
     {
-        while(true)
+        while (true)
         {
             _gameOverText.text = "GAME OVER";
             yield return new WaitForSeconds(0.5f);
@@ -89,8 +79,6 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
-
-
     public void YouWinSequence()
     {
         _gameManager.YouWin();
@@ -98,9 +86,7 @@ public class UIManager : MonoBehaviour
         _restartText.gameObject.SetActive(true);
         _settingsScreenText.gameObject.SetActive(true);
         StartCoroutine(YouWinFlickerRoutine());
-
     }
-
     IEnumerator YouWinFlickerRoutine()
     {
         while (true)
@@ -111,5 +97,4 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
-
 }

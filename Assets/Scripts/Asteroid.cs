@@ -23,15 +23,8 @@ public class Asteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         transform.Rotate(Vector3.back * _rotateSpeed * Time.deltaTime);
-
     }
-
-
-
-    
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {

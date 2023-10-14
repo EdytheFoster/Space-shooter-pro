@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class LaserDetector : MonoBehaviour
 {
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player") return;
@@ -18,7 +17,6 @@ public class LaserDetector : MonoBehaviour
             {
                 value = -3f;
                 if (Random.Range(0, 2) == 0) this.GetComponentInParent<Enemy1>().Dodge(value);
-
             }
 
             if (this.transform.position.x > collision.transform.position.x)
@@ -26,7 +24,6 @@ public class LaserDetector : MonoBehaviour
                 value = 3f;
                 if (Random.Range(0, 2) == 0) this.GetComponentInParent<Enemy1>().Dodge(value);
             }
-
         }
     }
 }
