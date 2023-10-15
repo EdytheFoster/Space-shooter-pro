@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - name: wave 1
-    count: 1
+    count: 3
     typeOfEnemies:
     - {fileID: 4077475155324487626, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
     - {fileID: 162820015390165314, guid: 4d80826ce5d48cd49bc0d1655b120090, type: 3}
@@ -1243,7 +1243,7 @@ MonoBehaviour:
     spawnInterval: 1
     rate: 1
   - name: wave 2
-    count: 1
+    count: 4
     typeOfEnemies:
     - {fileID: 4077475155324487626, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
     - {fileID: 162820015390165314, guid: 4d80826ce5d48cd49bc0d1655b120090, type: 3}
@@ -1254,7 +1254,7 @@ MonoBehaviour:
     spawnInterval: 1
     rate: 2
   - name: wave 3
-    count: 1
+    count: 5
     typeOfEnemies:
     - {fileID: 4077475155324487626, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
     - {fileID: 162820015390165314, guid: 4d80826ce5d48cd49bc0d1655b120090, type: 3}
@@ -1265,7 +1265,7 @@ MonoBehaviour:
     spawnInterval: 1
     rate: 3
   - name: wave 4
-    count: 1
+    count: 5
     typeOfEnemies:
     - {fileID: 4077475155324487626, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
     - {fileID: 162820015390165314, guid: 4d80826ce5d48cd49bc0d1655b120090, type: 3}
@@ -1276,7 +1276,7 @@ MonoBehaviour:
     spawnInterval: 1
     rate: 3
   - name: wave 5
-    count: 1
+    count: 5
     typeOfEnemies:
     - {fileID: 4077475155324487626, guid: 0fbfe5f4310b39f4ebdc7de379c7db0b, type: 3}
     - {fileID: 162820015390165314, guid: 4d80826ce5d48cd49bc0d1655b120090, type: 3}

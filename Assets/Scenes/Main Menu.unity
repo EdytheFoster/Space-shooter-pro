@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 370.1, y: 40.4}
+  m_AnchoredPosition: {x: 370.1, y: -5.8}
   m_SizeDelta: {x: 146.68878, y: 33.3023}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &215394661
@@ -315,7 +315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 371, y: -4}
+  m_AnchoredPosition: {x: 371, y: -53.8}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &365393042
@@ -1326,8 +1326,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 397, y: 128}
-  m_SizeDelta: {x: 206.92096, y: 133.89638}
+  m_AnchoredPosition: {x: 397, y: 114.39}
+  m_SizeDelta: {x: 206.92096, y: 181.51466}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1852996608
 MonoBehaviour:
@@ -1361,7 +1361,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Player Movement
+  m_Text: 'Player Movement:
+
 
     W, A, S, D and Arrow Keys
 
@@ -1373,7 +1374,11 @@ MonoBehaviour:
     Speed Boost - Shift
 
 
-    Destroy the asteroid to start game'
+    Move Power Ups to You - C
+
+
+    Destroy the asteroid
+    to start game'
 --- !u!222 &1852996609
 CanvasRenderer:
   m_ObjectHideFlags: 0
