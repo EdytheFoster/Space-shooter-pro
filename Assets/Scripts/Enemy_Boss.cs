@@ -88,9 +88,9 @@ public class Enemy_Boss : MonoBehaviour
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
         _audioSource1 = GetComponent<AudioSource>();
-        _multi_Shot_Powerup_Prefab.SetActive(false);
+      _multi_Shot_Powerup_Prefab.SetActive(false);
         _triple_Shot_Powrup_Prefab.SetActive(false);
-        _missile_Powerup_Prefab.SetActive(false);
+        _missile_Powerup_Prefab.SetActive(false);  
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
 
         if (_gameManager == null)
@@ -205,6 +205,9 @@ public class Enemy_Boss : MonoBehaviour
             _anim.SetTrigger("OnEnemyDeath");
             _speed = 0;
             _audioSource.Play();
+            _multi_Shot_Powerup_Prefab.SetActive(true);
+            _triple_Shot_Powrup_Prefab.SetActive(true);
+            _missile_Powerup_Prefab.SetActive(true);
             Destroy(this.gameObject, 2.4f);
             _spawnManager.OnEnemyBossDeath();
             _waveSpawner.OnEnemyBossDeath();

@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] _powerups;
-    public int[] powerupsTable = { 40, 20, 10, 10, 10, 5, 5 };
+    public int[] powerupsTable = { 40, 20, 5, 10, 5, 10, 5, 5 };
     private int _powerupTotalWeight;
     private int _powerupRandomNumber;
 

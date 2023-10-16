@@ -62,6 +62,12 @@ public class Player : MonoBehaviour
     private AudioSource _audioSource;
     [SerializeField]
     private GameObject _missilePrefab;
+    [SerializeField]
+    private GameObject _multi_Shot_Powerup_Prefab;
+    [SerializeField]
+    private GameObject _triple_Shot_Powrup_Prefab;
+    [SerializeField]
+    private GameObject _missile_Powerup_Prefab;
 
     public bool _isMissilePrefab = true;
     public bool _isLaserPrefab = true;
@@ -320,6 +326,9 @@ public class Player : MonoBehaviour
         if (_lives < 1)
         {
             GetComponent<Collider2D>().enabled = false;
+            _multi_Shot_Powerup_Prefab.SetActive(true);
+            _triple_Shot_Powrup_Prefab.SetActive(true);
+            _missile_Powerup_Prefab.SetActive(true);
             _spawnManager.OnPlayerDeath();
             _waveSpawner.OnPlayerDeath();
             Destroy(this.gameObject);
